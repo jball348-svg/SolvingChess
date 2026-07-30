@@ -1,3 +1,5 @@
 # SolvingChess
 
-A project to solve the game of chess using advanced math and research
+Research into novel mathematical approaches to solving chess.
+
+Work in progress.

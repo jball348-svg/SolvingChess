@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Solved tables can be large; results/*.json is small and is committed.
+*.tb
+*.npy

@@ -1,0 +1,118 @@
+{
+  "provenance": {
+    "timestamp": "2026-08-03T08:49:55Z",
+    "commit": "434d208",
+    "python": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39"
+  },
+  "rows": [
+    {
+      "universe": "K-K@4x4",
+      "group_order": 16,
+      "raw": 312,
+      "symmetry": 21,
+      "bisim_wdl": 1,
+      "bisim_dtm": 1,
+      "sym_compression": 93.26923076923077,
+      "wdl_compression": 99.67948717948718,
+      "gap": 21.0,
+      "rounds": 1
+    },
+    {
+      "universe": "KR-K@4x4",
+      "group_order": 8,
+      "raw": 3808,
+      "symmetry": 485,
+      "bisim_wdl": 410,
+      "bisim_dtm": 410,
+      "sym_compression": 87.26365546218487,
+      "wdl_compression": 89.23319327731092,
+      "gap": 1.1829268292682926,
+      "rounds": 7
+    },
+    {
+      "universe": "KQ-K@4x4",
+      "group_order": 8,
+      "raw": 3308,
+      "symmetry": 420,
+      "bisim_wdl": 273,
+      "bisim_dtm": 273,
+      "sym_compression": 87.30350665054414,
+      "wdl_compression": 91.74727932285369,
+      "gap": 1.5384615384615385,
+      "rounds": 8
+    },
+    {
+      "universe": "KN-K@4x4",
+      "group_order": 8,
+      "raw": 4280,
+      "symmetry": 544,
+      "bisim_wdl": 495,
+      "bisim_dtm": 495,
+      "sym_compression": 87.28971962616822,
+      "wdl_compression": 88.43457943925233,
+      "gap": 1.098989898989899,
+      "rounds": 12
+    },
+    {
+      "universe": "KB-K@4x4",
+      "group_order": 8,
+      "raw": 4180,
+      "symmetry": 529,
+      "bisim_wdl": 473,
+      "bisim_dtm": 473,
+      "sym_compression": 87.3444976076555,
+      "wdl_compression": 88.68421052631578,
+      "gap": 1.1183932346723044,
+      "rounds": 10
+    },
+    {
+      "universe": "KP-K@4x4",
+      "group_order": 2,
+      "raw": 18740,
+      "symmetry": 9370,
+      "bisim_wdl": 3456,
+      "bisim_dtm": 3456,
+      "sym_compression": 50.0,
+      "wdl_compression": 81.5581643543223,
+      "gap": 2.7112268518518516,
+      "rounds": 13
+    },
+    {
+      "universe": "KR-KR@4x4",
+      "group_order": 16,
+      "raw": 42536,
+      "symmetry": 2669,
+      "bisim_wdl": 2559,
+      "bisim_dtm": 2559,
+      "sym_compression": 93.72531502727102,
+      "wdl_compression": 93.98391950347941,
+      "gap": 1.042985541227042,
+      "rounds": 8
+    },
+    {
+      "universe": "KQ-K@5x5",
+      "group_order": 8,
+      "raw": 16376,
+      "symmetry": 2081,
+      "bisim_wdl": 1702,
+      "bisim_dtm": 1702,
+      "sym_compression": 87.2923790913532,
+      "wdl_compression": 89.60674157303372,
+      "gap": 1.2226792009400704,
+      "rounds": 8
+    },
+    {
+      "universe": "KR-K@5x5",
+      "group_order": 8,
+      "raw": 18440,
+      "symmetry": 2346,
+      "bisim_wdl": 2162,
+      "bisim_dtm": 2162,
+      "sym_compression": 87.27765726681127,
+      "wdl_compression": 88.27548806941432,
+      "gap": 1.0851063829787233,
+      "rounds": 9
+    }
+  ]
+}

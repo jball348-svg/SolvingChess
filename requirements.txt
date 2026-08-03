@@ -1,0 +1,6 @@
+# The kernel needs numpy for the retrograde pass (CSR construction and the
+# value/DTM arrays). Everything else is standard library.
+numpy>=1.24
+
+# Optional: `make test` falls back to a plain runner if pytest is absent.
+pytest>=7.0

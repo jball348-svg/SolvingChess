@@ -40,9 +40,15 @@ Two directions run in parallel:
 * `singleton-KQR@4x4` -- king, queen and rook a side on 4x4 -- is a forced win
   for White in 6 moves.
 * Full Singleton Chess on 5x5 projects to ~10^15 states. Out of reach.
+* **Aggregate laws transfer across board size; per-position rules do not.** The
+  drawn fraction of KQ vs K goes as `1/area` (local exponent -1.007 at 8x8) and a
+  fit on boards of area 16-30 predicts 8x8 to 1.8%. A positional decision rule
+  fitted on the same small boards decays from 96% to 61%.
 
-The evidence so far runs *against* the strong form of the founding hypothesis,
-and the repository says so in its own results files. Keep it that way.
+The evidence runs *against* the strong form of the founding hypothesis -- there
+is no hidden geometric structure to find -- but *for* a weaker and more specific
+version: statistical invariants over whole state spaces do survive rescaling. The
+repository says both in its own results files. Keep it that way.
 
 ## Ground rules
 

@@ -28,23 +28,39 @@ notebooks/      Exploratory notebooks
 
 ## Results so far
 
+**A law fitted on tiny boards predicts the real 8x8 board.** The drawn fraction
+of KQ vs K, fitted as a power law on boards of area 16 to 30 only, predicts 8x8
+to within **1.8%**. The exponent settles on **-1.007**: drawn fraction is
+inversely proportional to board area. That is a size-independent statement about
+a chess endgame, obtained from boards a quarter of the size.
+
+**But per-position rules do not transfer.** A readable 39-node rule scores 96% on
+`KR-K@4x4` and decays to 61% on 8x8. Every feature normalisation decays. Read
+with the result above: **aggregate laws transfer, per-position rules do not** --
+which moves the target from positional invariants to statistical ones.
+
 **`singleton-KQR@4x4` is a forced win for White in 6 moves.** King, queen and
 rook a side on a 4x4 board -- every piece moving exactly as it does in chess --
-solved exactly, from the start position, whole game. The state graph is 169,223
-symmetry classes.
+solved exactly, from the start position, whole game. 169,223 symmetry classes.
 
 **Board symmetry buys a constant factor and nothing more.** Across twelve
 universes, symmetry reduction achieves 90-100% of its theoretical ceiling
 `1 - 1/|G|`, with `|G| <= 16`. A single pawn drops the group from order 8 to
-order 2. Symmetry is not a route to compression that scales.
+order 2.
+
+**And after symmetry, pawnless micro-chess has almost nothing left.** The
+bisimulation quotient -- the floor for *any* value-preserving abstraction -- is
+only 1.0x to 1.5x below the symmetry quotient. The exception is pawn positions,
+at 2.7x, which is where the remaining structure lives.
 
 **Full Singleton Chess 5x5 is out of reach, by about eight orders of magnitude.**
-The 12-piece universe has 1.29 x 10^15 piece placements. Measured growth across
-the ladder makes the projection precise rather than hand-wavy.
+2.49 x 10^15 piece placements; measured growth projects ~7 x 10^14 states.
 
-Details: [experiment 001](experiments/exp001_symmetry_compression/results.md),
-[experiment 002](experiments/exp002_minification_ladder/results.md),
-[experiment 003](experiments/exp003_quotient_gap/results.md).
+Details: [001 symmetry](experiments/exp001_symmetry_compression/results.md) *
+[002 minification](experiments/exp002_minification_ladder/results.md) *
+[003 structure gap](experiments/exp003_quotient_gap/results.md) *
+[004 invariant transfer](experiments/exp004_invariant_transfer/results.md) *
+[005 scaling law](experiments/exp005_scaling_law/results.md)
 
 ## Quick start
 
@@ -89,6 +105,8 @@ Both are in `tests/test_solvingchess.py` and run in `make test`.
 4. [research/06](research/06-candidate-mechanisms.md) -- ten routes to a
    solution, ranked, each with an experiment attached.
 5. [docs/roadmap.md](docs/roadmap.md) -- what to build next and in what order.
+6. [docs/experiment-catalogue.md](docs/experiment-catalogue.md) -- twenty-five
+   testable ideas with Python sketches for each.
 
 ## Central question
 

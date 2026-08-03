@@ -86,6 +86,49 @@ of the three with a plausible workflow**, and it is exactly mechanism 5 of note
 06: fit on one rung, *predict* the next rung before solving it, and treat a
 successful prediction as evidence the invariant is size-independent.
 
+## What happened when we tried (c)
+
+Experiments 004 and 005 ran that workflow. The result splits cleanly, and the
+split is the most useful thing measured so far:
+
+> **Aggregate laws transfer. Per-position rules do not.**
+
+**Experiment 005 (aggregate).** The drawn fraction of `KQ-K`, fitted as a power
+law on boards of area 16 to 30 only, predicts the real 8x8 board to within
+**1.8%**. The local exponent settles on **-1.007**: the drawn fraction is
+inversely proportional to board area, and the convergence is visible in the data
+rather than assumed. `KR-K` follows the same trend more slowly (-0.788 rising
+monotonically to -0.930 by 8x8).
+
+That is a size-independent statement of exactly the kind this note said we did
+not have. It also comes with a mechanism to check: for three pieces there are
+`O(A^3)` positions, and a `KQ-K` draw needs the queen inside a bounded
+neighbourhood of the kings -- stalemate or en prise -- which pins one placement
+to `O(1)` choices and gives `O(A^2)` draws out of `O(A^3)`.
+
+**Experiment 004 (per-position).** A 39-node rule over confinement, opposition,
+edge distance and mobility scores 96% on `KR-K@4x4` and decays monotonically to
+**61%** on 8x8. Every feature normalisation decays. The rule that looked like it
+transferred better turned out to be answering 69% of its 8x8 predictions from an
+unseen-value fallback.
+
+## What this does to the argument
+
+Option (c) is alive, but not in the form anyone expected. The invariant to hunt
+for is **statistical over a whole state space**, not positional. That is a weaker
+object than a rule that classifies individual positions -- but it is also exactly
+what an ultra-weak solution is: a statement about the value of a game, with no
+strategy attached.
+
+It also sharpens the falsification criteria below. "No cheap feature map predicts
+values on a rung it was not fitted to" has now been tested once and come out
+**negative** for positional features. The criterion should be re-read as applying
+to aggregate quantities, where it has come out **positive**.
+
+The honest summary: this note's objection stands against the original framing and
+has been partly answered by a framing nobody had written down. Neither the
+pessimism nor the optimism was right.
+
 The programme should be restated around (c). "Solve the toy, then scale the
 proof" is the wrong slogan. The right one is:
 
@@ -124,9 +167,20 @@ This should be said, because it is the honest reason to continue.
 
 ## Next hypothesis
 
-The single cheapest test of the entire programme: take `KR-K`, solve it on 4x4,
-4x5, 4x6, 5x5, 5x6 and 6x6, and plot drawn fraction and maximum DTM against
-board dimensions. **If those two curves are not smooth, there is nothing to
-induct on and the scaling story should be abandoned in its current form.** This
-is one script and a few minutes of compute, and it is the next thing that should
-be built.
+The previous version of this section proposed solving `KR-K` across board shapes
+and checking whether drawn fraction and maximum DTM are smooth. That is
+experiment 005 and it ran: **drawn fraction is smooth and predictive, maximum DTM
+is neither** (it is an extreme-value statistic quantised to even integers, and
+fitting a power law to it was close to a category error).
+
+The successor hypothesis, stated in advance: **the `1/area` law for `KQ-K` has a
+counting proof.** Partition the drawn set by board size into stalemates,
+queen-en-prise positions, and everything else. If the third bucket grows as
+`O(area)` while the first two grow as `O(area^2)` out of `O(area^3)` total, the
+law stops being a curve fit and becomes an argument -- the first thing in this
+repository that could plausibly be written up as a theorem.
+
+If instead the residual bucket grows as `O(area^2)`, the mechanism is wrong, the
+exponent of -1 is a coincidence of small boards, and the law should not be
+trusted past where it has been measured. This is roadmap item 008 and it is
+cheap.

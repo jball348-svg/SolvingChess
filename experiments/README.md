@@ -15,8 +15,15 @@ Each experiment is a directory `expNNN_short_name/` containing:
 | [001](exp001_symmetry_compression/) | Symmetry compression | `research/03` H1 | Symmetry buys exactly `\|G\| <= 16` and 90-100% of its ceiling. Does not scale. |
 | [002](exp002_minification_ladder/) | Minification ladder | `research/05` | `singleton-KQR@4x4` is a White win in 6 moves. Full Singleton 5x5 is ~10^15 states -- out of reach. |
 | [003](exp003_quotient_gap/) | Structure gap | `research/03` H2 | Pawnless gap x1.0-x1.5; pawnful gap x2.7. Structure is combinatorial, not geometric. |
+| [004](exp004_invariant_transfer/) | Invariant transfer | `research/03` H3, `research/07` | Positional rules beat baseline everywhere but decay 96% -> 61% from 4x4 to 8x8. |
+| [005](exp005_scaling_law/) | Scaling law | `research/07` | Drawn fraction of KQ-K is `C/area`; a fit on area 16-30 predicts 8x8 to 1.8%. |
 
-Planned experiments and their ordering are in [`docs/roadmap.md`](../docs/roadmap.md).
+Read 004 and 005 together: **aggregate laws transfer, per-position rules do
+not.**
+
+Planned experiments and their ordering are in [`docs/roadmap.md`](../docs/roadmap.md);
+the full catalogue of testable ideas with Python sketches is in
+[`docs/experiment-catalogue.md`](../docs/experiment-catalogue.md).
 
 ## Rules
 

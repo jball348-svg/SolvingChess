@@ -1,0 +1,661 @@
+{
+  "provenance": {
+    "timestamp": "2026-08-03T09:07:05Z",
+    "commit": "9c3325f",
+    "python": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39"
+  },
+  "fit_shapes": [
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      4
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      5,
+      6
+    ]
+  ],
+  "holdout_shapes": [
+    [
+      6,
+      6
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      8,
+      8
+    ]
+  ],
+  "families": {
+    "KR-K": {
+      "rows": [
+        {
+          "universe": "KR-K@4x4",
+          "spec": "KR-K",
+          "files": 4,
+          "ranks": 4,
+          "area": 16,
+          "diameter": 8,
+          "states": 3808,
+          "draw_fraction": 0.2426470588235294,
+          "max_dtm": 14,
+          "mean_dtm": 6.712898751733703,
+          "seconds": 0.0787588709999909
+        },
+        {
+          "universe": "KR-K@4x5",
+          "spec": "KR-K",
+          "files": 4,
+          "ranks": 5,
+          "area": 20,
+          "diameter": 9,
+          "states": 8490,
+          "draw_fraction": 0.20353356890459365,
+          "max_dtm": 18,
+          "mean_dtm": 8.58592132505176,
+          "seconds": 0.19322769999999423
+        },
+        {
+          "universe": "KR-K@5x4",
+          "spec": "KR-K",
+          "files": 5,
+          "ranks": 4,
+          "area": 20,
+          "diameter": 9,
+          "states": 8490,
+          "draw_fraction": 0.20353356890459365,
+          "max_dtm": 18,
+          "mean_dtm": 8.58592132505176,
+          "seconds": 0.18406985599997938
+        },
+        {
+          "universe": "KR-K@4x6",
+          "spec": "KR-K",
+          "files": 4,
+          "ranks": 6,
+          "area": 24,
+          "diameter": 10,
+          "states": 16016,
+          "draw_fraction": 0.1750749250749251,
+          "max_dtm": 20,
+          "mean_dtm": 10.48622464426279,
+          "seconds": 0.3840838860000133
+        },
+        {
+          "universe": "KR-K@5x5",
+          "spec": "KR-K",
+          "files": 5,
+          "ranks": 5,
+          "area": 25,
+          "diameter": 10,
+          "states": 18440,
+          "draw_fraction": 0.16898047722342732,
+          "max_dtm": 20,
+          "mean_dtm": 10.389976507439311,
+          "seconds": 0.4884021480000058
+        },
+        {
+          "universe": "KR-K@5x6",
+          "spec": "KR-K",
+          "files": 5,
+          "ranks": 6,
+          "area": 30,
+          "diameter": 11,
+          "states": 34228,
+          "draw_fraction": 0.14444314596236998,
+          "max_dtm": 22,
+          "mean_dtm": 12.147384237126076,
+          "seconds": 0.9788913130000196
+        },
+        {
+          "universe": "KR-K@6x6",
+          "spec": "KR-K",
+          "files": 6,
+          "ranks": 6,
+          "area": 36,
+          "diameter": 12,
+          "states": 62880,
+          "draw_fraction": 0.12296437659033078,
+          "max_dtm": 24,
+          "mean_dtm": 14.268078624791471,
+          "seconds": 1.8946087570000145
+        },
+        {
+          "universe": "KR-K@7x7",
+          "spec": "KR-K",
+          "files": 7,
+          "ranks": 7,
+          "area": 49,
+          "diameter": 14,
+          "states": 172340,
+          "draw_fraction": 0.09295578507601253,
+          "max_dtm": 28,
+          "mean_dtm": 17.629452405322414,
+          "seconds": 5.982178425000001
+        },
+        {
+          "universe": "KR-K@8x8",
+          "spec": "KR-K",
+          "files": 8,
+          "ranks": 8,
+          "area": 64,
+          "diameter": 16,
+          "states": 406336,
+          "draw_fraction": 0.0725212631910537,
+          "max_dtm": 32,
+          "mean_dtm": 21.01750214929365,
+          "seconds": 16.81061273200001
+        }
+      ],
+      "draw_fraction_vs_area": {
+        "quantity": "draw_fraction",
+        "driver": "area",
+        "a": 2.4079985500677923,
+        "b": -0.8257733697814795,
+        "fit_r2": 0.9994834220077279,
+        "fit_points": 6,
+        "predictions": [
+          {
+            "universe": "KR-K@6x6",
+            "predicted": 0.1248829245496849,
+            "actual": 0.12296437659033078,
+            "relative_error": 0.015602469695316458
+          },
+          {
+            "universe": "KR-K@7x7",
+            "predicted": 0.09681380929774917,
+            "actual": 0.09295578507601253,
+            "relative_error": 0.041503863568919684
+          },
+          {
+            "universe": "KR-K@8x8",
+            "predicted": 0.07765347541451688,
+            "actual": 0.0725212631910537,
+            "relative_error": 0.07076837878488981
+          }
+        ],
+        "worst_relative_error": 0.07076837878488981,
+        "mean_relative_error": 0.042624904016375316
+      },
+      "max_dtm_vs_area": {
+        "quantity": "max_dtm",
+        "driver": "area",
+        "a": 2.2115313569498554,
+        "b": 0.6863523816756816,
+        "fit_r2": 0.930241872312211,
+        "fit_points": 6,
+        "predictions": [
+          {
+            "universe": "KR-K@6x6",
+            "predicted": 25.87408672877348,
+            "actual": 24,
+            "relative_error": 0.07808694703222836
+          },
+          {
+            "universe": "KR-K@7x7",
+            "predicted": 31.97151429034876,
+            "actual": 28,
+            "relative_error": 0.14183979608388433
+          },
+          {
+            "universe": "KR-K@8x8",
+            "predicted": 38.40334275212805,
+            "actual": 32,
+            "relative_error": 0.20010446100400148
+          }
+        ],
+        "worst_relative_error": 0.20010446100400148,
+        "mean_relative_error": 0.1400104013733714
+      },
+      "max_dtm_vs_diameter": {
+        "quantity": "max_dtm",
+        "driver": "diameter",
+        "a": 0.8728912134768757,
+        "b": 1.3592070564117302,
+        "fit_r2": 0.943455401807339,
+        "fit_points": 6,
+        "predictions": [
+          {
+            "universe": "KR-K@6x6",
+            "predicted": 25.573542212540275,
+            "actual": 24,
+            "relative_error": 0.06556425885584478
+          },
+          {
+            "universe": "KR-K@7x7",
+            "predicted": 31.534462691764464,
+            "actual": 28,
+            "relative_error": 0.12623081042015943
+          },
+          {
+            "universe": "KR-K@8x8",
+            "predicted": 37.81015860204123,
+            "actual": 32,
+            "relative_error": 0.18156745631378834
+          }
+        ],
+        "worst_relative_error": 0.18156745631378834,
+        "mean_relative_error": 0.12445417519659752
+      },
+      "mean_dtm_vs_diameter": {
+        "quantity": "mean_dtm",
+        "driver": "diameter",
+        "a": 0.1405736778819914,
+        "b": 1.8672196617805066,
+        "fit_r2": 0.995561481237098,
+        "fit_points": 6,
+        "predictions": [
+          {
+            "universe": "KR-K@6x6",
+            "predicted": 14.553667507890648,
+            "actual": 14.268078624791471,
+            "relative_error": 0.02001593140949982
+          },
+          {
+            "universe": "KR-K@7x7",
+            "predicted": 19.407822462283217,
+            "actual": 17.629452405322414,
+            "relative_error": 0.1008749458618411
+          },
+          {
+            "universe": "KR-K@8x8",
+            "predicted": 24.90350723285192,
+            "actual": 21.01750214929365,
+            "relative_error": 0.1848937640617235
+          }
+        ],
+        "worst_relative_error": 0.1848937640617235,
+        "mean_relative_error": 0.10192821377768814
+      },
+      "draw_fraction_local_exponents": [
+        {
+          "from": "KR-K@4x4",
+          "to": "KR-K@5x4",
+          "exponent": -0.7877306094510773
+        },
+        {
+          "from": "KR-K@5x4",
+          "to": "KR-K@4x6",
+          "exponent": -0.8261059531723083
+        },
+        {
+          "from": "KR-K@4x6",
+          "to": "KR-K@5x5",
+          "exponent": -0.8679349731881596
+        },
+        {
+          "from": "KR-K@5x5",
+          "to": "KR-K@5x6",
+          "exponent": -0.8605521751757832
+        },
+        {
+          "from": "KR-K@5x6",
+          "to": "KR-K@6x6",
+          "exponent": -0.8830074029939722
+        },
+        {
+          "from": "KR-K@6x6",
+          "to": "KR-K@7x7",
+          "exponent": -0.9074586687196348
+        },
+        {
+          "from": "KR-K@7x7",
+          "to": "KR-K@8x8",
+          "exponent": -0.9295347770918884
+        }
+      ]
+    },
+    "KQ-K": {
+      "rows": [
+        {
+          "universe": "KQ-K@4x4",
+          "spec": "KQ-K",
+          "files": 4,
+          "ranks": 4,
+          "area": 16,
+          "diameter": 8,
+          "states": 3308,
+          "draw_fraction": 0.3192261185006046,
+          "max_dtm": 8,
+          "mean_dtm": 4.626998223801066,
+          "seconds": 0.07333628599999997
+        },
+        {
+          "universe": "KQ-K@4x5",
+          "spec": "KQ-K",
+          "files": 4,
+          "ranks": 5,
+          "area": 20,
+          "diameter": 9,
+          "states": 7482,
+          "draw_fraction": 0.25768511093290564,
+          "max_dtm": 10,
+          "mean_dtm": 5.7050774216780695,
+          "seconds": 0.17386096300000986
+        },
+        {
+          "universe": "KQ-K@5x4",
+          "spec": "KQ-K",
+          "files": 5,
+          "ranks": 4,
+          "area": 20,
+          "diameter": 9,
+          "states": 7482,
+          "draw_fraction": 0.25768511093290564,
+          "max_dtm": 10,
+          "mean_dtm": 5.7050774216780695,
+          "seconds": 0.1758189640000012
+        },
+        {
+          "universe": "KQ-K@4x6",
+          "spec": "KQ-K",
+          "files": 4,
+          "ranks": 6,
+          "area": 24,
+          "diameter": 10,
+          "states": 14308,
+          "draw_fraction": 0.21414593234554097,
+          "max_dtm": 12,
+          "mean_dtm": 6.774457488438278,
+          "seconds": 0.3828254419999837
+        },
+        {
+          "universe": "KQ-K@5x5",
+          "spec": "KQ-K",
+          "files": 5,
+          "ranks": 5,
+          "area": 25,
+          "diameter": 10,
+          "states": 16376,
+          "draw_fraction": 0.2071323888617489,
+          "max_dtm": 12,
+          "mean_dtm": 6.440542205791743,
+          "seconds": 0.4401419630000021
+        },
+        {
+          "universe": "KQ-K@5x6",
+          "spec": "KQ-K",
+          "files": 5,
+          "ranks": 6,
+          "area": 30,
+          "diameter": 11,
+          "states": 30716,
+          "draw_fraction": 0.17241828363068107,
+          "max_dtm": 12,
+          "mean_dtm": 7.392761605035405,
+          "seconds": 0.8770417179999868
+        },
+        {
+          "universe": "KQ-K@6x6",
+          "spec": "KQ-K",
+          "files": 6,
+          "ranks": 6,
+          "area": 36,
+          "diameter": 12,
+          "states": 56800,
+          "draw_fraction": 0.14380281690140845,
+          "max_dtm": 14,
+          "mean_dtm": 8.22224050008225,
+          "seconds": 1.7264967749999869
+        },
+        {
+          "universe": "KQ-K@7x7",
+          "spec": "KQ-K",
+          "files": 7,
+          "ranks": 7,
+          "area": 49,
+          "diameter": 14,
+          "states": 157720,
+          "draw_fraction": 0.1054527009890946,
+          "max_dtm": 16,
+          "mean_dtm": 10.005273304604218,
+          "seconds": 6.001891873999995
+        },
+        {
+          "universe": "KQ-K@8x8",
+          "spec": "KQ-K",
+          "files": 8,
+          "ranks": 8,
+          "area": 64,
+          "diameter": 16,
+          "states": 375676,
+          "draw_fraction": 0.0805800743193603,
+          "max_dtm": 20,
+          "mean_dtm": 11.717119662771712,
+          "seconds": 17.940974745000005
+        }
+      ],
+      "draw_fraction_vs_area": {
+        "quantity": "draw_fraction",
+        "driver": "area",
+        "a": 4.868295646059094,
+        "b": -0.9817639511353751,
+        "fit_r2": 0.9998148944382869,
+        "fit_points": 6,
+        "predictions": [
+          {
+            "universe": "KQ-K@6x6",
+            "predicted": 0.14436278517196033,
+            "actual": 0.14380281690140845,
+            "relative_error": 0.003894000706090452
+          },
+          {
+            "universe": "KQ-K@7x7",
+            "predicted": 0.10666043801725954,
+            "actual": 0.1054527009890946,
+            "relative_error": 0.011452879033319794
+          },
+          {
+            "universe": "KQ-K@8x8",
+            "predicted": 0.08206057520742355,
+            "actual": 0.0805800743193603,
+            "relative_error": 0.018373039496037497
+          }
+        ],
+        "worst_relative_error": 0.018373039496037497,
+        "mean_relative_error": 0.011239973078482582
+      },
+      "max_dtm_vs_area": {
+        "quantity": "max_dtm",
+        "driver": "area",
+        "a": 1.239399861162898,
+        "b": 0.69235228770856,
+        "fit_r2": 0.8700042461244667,
+        "fit_points": 6,
+        "predictions": [
+          {
+            "universe": "KQ-K@6x6",
+            "predicted": 14.815661261359873,
+            "actual": 14,
+            "relative_error": 0.05826151866856234
+          },
+          {
+            "universe": "KQ-K@7x7",
+            "predicted": 18.34098120607612,
+            "actual": 16,
+            "relative_error": 0.14631132537975744
+          },
+          {
+            "universe": "KQ-K@8x8",
+            "predicted": 22.066033855109527,
+            "actual": 20,
+            "relative_error": 0.10330169275547636
+          }
+        ],
+        "worst_relative_error": 0.14631132537975744,
+        "mean_relative_error": 0.10262484560126538
+      },
+      "max_dtm_vs_diameter": {
+        "quantity": "max_dtm",
+        "driver": "diameter",
+        "a": 0.4770712478443198,
+        "b": 1.3786398100089574,
+        "fit_r2": 0.8921076830415466,
+        "fit_points": 6,
+        "predictions": [
+          {
+            "universe": "KQ-K@6x6",
+            "predicted": 14.668492099804574,
+            "actual": 14,
+            "relative_error": 0.04774943570032671
+          },
+          {
+            "universe": "KQ-K@7x7",
+            "predicted": 18.1418253044993,
+            "actual": 16,
+            "relative_error": 0.1338640815312062
+          },
+          {
+            "universe": "KQ-K@8x8",
+            "predicted": 21.80876071140779,
+            "actual": 20,
+            "relative_error": 0.09043803557038946
+          }
+        ],
+        "worst_relative_error": 0.1338640815312062,
+        "mean_relative_error": 0.09068385093397413
+      },
+      "mean_dtm_vs_diameter": {
+        "quantity": "mean_dtm",
+        "driver": "diameter",
+        "a": 0.2250359564445952,
+        "b": 1.4647124383122705,
+        "fit_r2": 0.9800808565428242,
+        "fit_points": 6,
+        "predictions": [
+          {
+            "universe": "KQ-K@6x6",
+            "predicted": 8.569236123568302,
+            "actual": 8.22224050008225,
+            "relative_error": 0.04220207660948141
+          },
+          {
+            "universe": "KQ-K@7x7",
+            "predicted": 10.73989178324126,
+            "actual": 10.005273304604218,
+            "relative_error": 0.07342312961096087
+          },
+          {
+            "universe": "KQ-K@8x8",
+            "predicted": 13.059947509558105,
+            "actual": 11.717119662771712,
+            "relative_error": 0.11460392019831474
+          }
+        ],
+        "worst_relative_error": 0.11460392019831474,
+        "mean_relative_error": 0.07674304213958567
+      },
+      "draw_fraction_local_exponents": [
+        {
+          "from": "KQ-K@4x4",
+          "to": "KQ-K@5x4",
+          "exponent": -0.95974697273982
+        },
+        {
+          "from": "KQ-K@5x4",
+          "to": "KQ-K@4x6",
+          "exponent": -1.0151330047603169
+        },
+        {
+          "from": "KQ-K@4x6",
+          "to": "KQ-K@5x5",
+          "exponent": -0.8157259659221875
+        },
+        {
+          "from": "KQ-K@5x5",
+          "to": "KQ-K@5x6",
+          "exponent": -1.0061056170750111
+        },
+        {
+          "from": "KQ-K@5x6",
+          "to": "KQ-K@6x6",
+          "exponent": -0.9953862572391584
+        },
+        {
+          "from": "KQ-K@6x6",
+          "to": "KQ-K@7x7",
+          "exponent": -1.0060951853620193
+        },
+        {
+          "from": "KQ-K@7x7",
+          "to": "KQ-K@8x8",
+          "exponent": -1.0072954126105365
+        }
+      ]
+    },
+    "KR-KR": {
+      "rows": [
+        {
+          "universe": "KR-KR@4x4",
+          "spec": "KR-KR",
+          "files": 4,
+          "ranks": 4,
+          "area": 16,
+          "diameter": 8,
+          "states": 42536,
+          "draw_fraction": 0.49087831483919503,
+          "max_dtm": 17,
+          "mean_dtm": 7.514591799039527,
+          "seconds": 1.1317330200000129
+        },
+        {
+          "universe": "KR-KR@4x5",
+          "spec": "KR-KR",
+          "files": 4,
+          "ranks": 5,
+          "area": 20,
+          "diameter": 9,
+          "states": 124416,
+          "draw_fraction": 0.5087127057613169,
+          "max_dtm": 21,
+          "mean_dtm": 9.680452849944375,
+          "seconds": 3.9236920069999996
+        },
+        {
+          "universe": "KR-KR@5x5",
+          "spec": "KR-KR",
+          "files": 5,
+          "ranks": 5,
+          "area": 25,
+          "diameter": 10,
+          "states": 352416,
+          "draw_fraction": 0.5414737128847725,
+          "max_dtm": 23,
+          "mean_dtm": 11.640922817961286,
+          "seconds": 13.65661266799998
+        }
+      ],
+      "draw_fraction_local_exponents": [
+        {
+          "from": "KR-KR@4x4",
+          "to": "KR-KR@4x5",
+          "exponent": 0.15992916862816142
+        },
+        {
+          "from": "KR-KR@4x5",
+          "to": "KR-KR@5x5",
+          "exponent": 0.2796903224779263
+        }
+      ]
+    }
+  }
+}

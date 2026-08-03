@@ -30,8 +30,11 @@ House rules for anything added here:
 | Claim | Status |
 |---|---|
 | Board symmetry compresses micro-chess state spaces | **Measured** -- `experiments/exp001_symmetry_compression` |
-| Symmetry is far from the best possible value-preserving compression | **Measured** -- `experiments/exp003_quotient_gap` |
+| Symmetry is far from the best possible value-preserving compression | **False for pawnless material** (gap x1.0-x1.5), **true for pawnful** (x2.7) -- `exp003` |
 | Small one-of-each-piece universes are exactly solvable | **Measured** -- `experiments/exp002_minification_ladder` |
 | Full Singleton Chess 5x5 is within reach of this codebase | **False** -- projection in exp002 |
-| A proof about a small board lifts to 8x8 | **Open, and the main risk to the whole programme** -- note 07 |
+| A *positional* rule fitted on 4x4 predicts 8x8 | **False** -- decays from 96% to 61%, `exp004` |
+| An *aggregate* law fitted on small boards predicts 8x8 | **True** -- 1.8% error for KQ-K, `exp005` |
+| The drawn fraction of KQ vs K goes as `1/area` | **Measured, mechanism unverified** -- local exponent -1.007 at 8x8, `exp005` |
+| A proof about a small board lifts to 8x8 | **Open, but the target has moved** from positional to statistical -- note 07 |
 | 4D representations reveal structure hidden in 2D chess | **Untested conjecture** -- no experiment yet |

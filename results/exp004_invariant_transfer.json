@@ -1,0 +1,1323 @@
+{
+  "provenance": {
+    "timestamp": "2026-08-03T09:15:05Z",
+    "commit": "9c3325f",
+    "python": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39"
+  },
+  "features": [
+    "in_check",
+    "stm_is_stronger",
+    "king_distance",
+    "defender_edge_distance",
+    "defender_corner_distance",
+    "opposition",
+    "mobility_bucket",
+    "confinement_bucket",
+    "confinement_absolute",
+    "attacker_piece_en_prise",
+    "slider_cuts_between_kings",
+    "defender_has_material"
+  ],
+  "feature_sets": {
+    "fraction": [
+      "in_check",
+      "stm_is_stronger",
+      "king_distance",
+      "defender_edge_distance",
+      "defender_corner_distance",
+      "opposition",
+      "mobility_bucket",
+      "confinement_bucket",
+      "attacker_piece_en_prise",
+      "slider_cuts_between_kings",
+      "defender_has_material"
+    ],
+    "absolute": [
+      "in_check",
+      "stm_is_stronger",
+      "king_distance",
+      "defender_edge_distance",
+      "defender_corner_distance",
+      "opposition",
+      "mobility_bucket",
+      "confinement_absolute",
+      "attacker_piece_en_prise",
+      "slider_cuts_between_kings",
+      "defender_has_material"
+    ],
+    "both": [
+      "in_check",
+      "stm_is_stronger",
+      "king_distance",
+      "defender_edge_distance",
+      "defender_corner_distance",
+      "opposition",
+      "mobility_bucket",
+      "confinement_bucket",
+      "confinement_absolute",
+      "attacker_piece_en_prise",
+      "slider_cuts_between_kings",
+      "defender_has_material"
+    ]
+  },
+  "max_depth": 6,
+  "sample_cap": 60000,
+  "trials": [
+    {
+      "train": {
+        "universe": "KR-K@4x4",
+        "solved_states": 3808,
+        "scored_states": 3808,
+        "sampled": false
+      },
+      "variants": {
+        "fraction": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_bucket",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 39,
+          "rule_depth": 7,
+          "rule": "if stm_is_stronger = 0:\n    if attacker_piece_en_prise = 0:\n        if confinement_bucket = <10%:\n            if in_check = 0:\n                => draw (n=36)\n            if in_check = 1:\n                => loss (n=32)\n        if confinement_bucket = <20%:\n            => loss (n=464)\n        if confinement_bucket = <40%:\n            => loss (n=716)\n        if confinement_bucket = >=40%:\n            if in_check = 0:\n                if mobility_bucket = 1:\n                    => draw (n=24)\n                if mobility_bucket = 2:\n                    => draw (n=12)\n                if mobility_bucket = 3-4:\n                    if defender_edge_distance = 0:\n                        => draw (n=124)\n                    if defender_edge_distance = 1:\n                        => loss (n=16)\n                if mobility_bucket = 5-8:\n                    if opposition = none:\n                        => draw (n=80)\n                    if opposition = direct:\n                        => draw (n=12)\n            if in_check = 1:\n                => loss (n=248)\n    if attacker_piece_en_prise = 1:\n        => draw (n=576)\nif stm_is_stronger = 1:\n    if confinement_bucket = <10%:\n        => win (n=80)\n    if confinement_bucket = <20%:\n        => win (n=536)\n    if confinement_bucket = <40%:\n        => win (n=576)\n    if confinement_bucket = >=40%:\n        if mobility_bucket = 1:\n            => draw (n=16)\n        if mobility_bucket = 2:\n            => draw (n=12)\n        if mobility_bucket = 3-4:\n            if defender_edge_distance = 0:\n                => draw (n=60)\n            if defender_edge_distance = 1:\n                => win (n=16)\n        if mobility_bucket = 5-8:\n            if defender_edge_distance = 0:\n                if defender_corner_distance = 0:\n                    if opposition = none:\n                        => draw (n=40)\n                    if opposition = direct:\n                        => win (n=12)\n                if defender_corner_distance = 1:\n                    if king_distance = 2:\n                        => win (n=40)\n                    if king_distance = 3:\n                        => win (n=48)\n            if defender_edge_distance = 1:\n                => win (n=32)\n",
+          "train_accuracy": 0.9590336134453782,
+          "train_baseline": 0.41281512605042014,
+          "transfers": [
+            {
+              "universe": "KR-K@5x5",
+              "solved_states": 18440,
+              "scored_states": 18440,
+              "sampled": false,
+              "accuracy": 0.7754880694143167,
+              "baseline": 0.4492407809110629,
+              "lift": 0.5923591965340685,
+              "fallback_rate": 0.11670281995661605,
+              "per_class": {
+                "win": 0.7579545454545454,
+                "loss": 0.7440849830999517,
+                "draw": 0.8985879332477535
+              }
+            },
+            {
+              "universe": "KR-K@6x6",
+              "solved_states": 62880,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.6997,
+              "baseline": 0.4718833333333333,
+              "lift": 0.4313756430081737,
+              "fallback_rate": 0.15956666666666666,
+              "per_class": {
+                "win": 0.6572369775581635,
+                "loss": 0.6848797372231837,
+                "draw": 0.895703863820589
+              }
+            },
+            {
+              "universe": "KR-K@8x8",
+              "solved_states": 406336,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.6144,
+              "baseline": 0.5000666666666667,
+              "lift": 0.22869715962128273,
+              "fallback_rate": 0.21706666666666666,
+              "per_class": {
+                "win": 0.5780526704788579,
+                "loss": 0.6059525396613785,
+                "draw": 0.8913499650268127
+              }
+            }
+          ]
+        },
+        "absolute": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_absolute",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 34,
+          "rule_depth": 7,
+          "rule": "if stm_is_stronger = 0:\n    if attacker_piece_en_prise = 0:\n        if confinement_absolute = <=1 sq:\n            if in_check = 0:\n                => draw (n=36)\n            if in_check = 1:\n                => loss (n=32)\n        if confinement_absolute = <=2 sq:\n            => loss (n=224)\n        if confinement_absolute = <=4 sq:\n            => loss (n=512)\n        if confinement_absolute = <=8 sq:\n            if king_distance = 2:\n                if defender_edge_distance = 0:\n                    if in_check = 0:\n                        => loss (n=192)\n                    if in_check = 1:\n                        => loss (n=104)\n                if defender_edge_distance = 1:\n                    => loss (n=160)\n            if king_distance = 3:\n                => loss (n=320)\n        if confinement_absolute = <=16 sq:\n            if in_check = 0:\n                => draw (n=128)\n            if in_check = 1:\n                => loss (n=56)\n    if attacker_piece_en_prise = 1:\n        => draw (n=576)\nif stm_is_stronger = 1:\n    if confinement_absolute = <=1 sq:\n        => win (n=80)\n    if confinement_absolute = <=2 sq:\n        => win (n=272)\n    if confinement_absolute = <=4 sq:\n        => win (n=472)\n    if confinement_absolute = <=8 sq:\n        if slider_cuts_between_kings = 0:\n            if mobility_bucket = 3-4:\n                => win (n=8)\n            if mobility_bucket = 5-8:\n                if defender_edge_distance = 0:\n                    if king_distance = 2:\n                        => win (n=116)\n                    if king_distance = 3:\n                        => win (n=48)\n                if defender_edge_distance = 1:\n                    => win (n=68)\n            if mobility_bucket = 9+:\n                => win (n=84)\n        if slider_cuts_between_kings = 1:\n            => win (n=192)\n    if confinement_absolute = <=16 sq:\n        => draw (n=128)\n",
+          "train_accuracy": 0.9852941176470589,
+          "train_baseline": 0.41281512605042014,
+          "transfers": [
+            {
+              "universe": "KR-K@5x5",
+              "solved_states": 18440,
+              "scored_states": 18440,
+              "sampled": false,
+              "accuracy": 0.6934924078091106,
+              "baseline": 0.4492407809110629,
+              "lift": 0.44348168570303265,
+              "fallback_rate": 0.06594360086767896,
+              "per_class": {
+                "win": 0.6346590909090909,
+                "loss": 0.7035248672139063,
+                "draw": 0.7997432605905006
+              }
+            },
+            {
+              "universe": "KR-K@6x6",
+              "solved_states": 62880,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.6129833333333333,
+              "baseline": 0.4718833333333333,
+              "lift": 0.2671758134250639,
+              "fallback_rate": 0.29983333333333334,
+              "per_class": {
+                "win": 0.5468807906114885,
+                "loss": 0.6386465581181789,
+                "draw": 0.7316941367198054
+              }
+            },
+            {
+              "universe": "KR-K@8x8",
+              "solved_states": 406336,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.8079,
+              "baseline": 0.5000666666666667,
+              "lift": 0.6157487665022002,
+              "fallback_rate": 0.6871166666666667,
+              "per_class": {
+                "win": 0.7904850818843117,
+                "loss": 0.8316891081189175,
+                "draw": 0.7458615061785964
+              }
+            }
+          ]
+        },
+        "both": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_bucket",
+            "confinement_absolute",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 35,
+          "rule_depth": 7,
+          "rule": "if stm_is_stronger = 0:\n    if attacker_piece_en_prise = 0:\n        if confinement_absolute = <=1 sq:\n            if in_check = 0:\n                => draw (n=36)\n            if in_check = 1:\n                => loss (n=32)\n        if confinement_absolute = <=2 sq:\n            => loss (n=224)\n        if confinement_absolute = <=4 sq:\n            => loss (n=512)\n        if confinement_absolute = <=8 sq:\n            if confinement_bucket = <40%:\n                => loss (n=444)\n            if confinement_bucket = >=40%:\n                if in_check = 0:\n                    if mobility_bucket = 1:\n                        => loss (n=16)\n                    if mobility_bucket = 2:\n                        => draw (n=12)\n                    if mobility_bucket = 3-4:\n                        => loss (n=80)\n                    if mobility_bucket = 5-8:\n                        => loss (n=32)\n                if in_check = 1:\n                    => loss (n=192)\n        if confinement_absolute = <=16 sq:\n            if in_check = 0:\n                => draw (n=128)\n            if in_check = 1:\n                => loss (n=56)\n    if attacker_piece_en_prise = 1:\n        => draw (n=576)\nif stm_is_stronger = 1:\n    if confinement_absolute = <=1 sq:\n        => win (n=80)\n    if confinement_absolute = <=2 sq:\n        => win (n=272)\n    if confinement_absolute = <=4 sq:\n        => win (n=472)\n    if confinement_absolute = <=8 sq:\n        if confinement_bucket = <40%:\n            => win (n=368)\n        if confinement_bucket = >=40%:\n            if king_distance = 2:\n                if defender_edge_distance = 0:\n                    if opposition = none:\n                        => draw (n=24)\n                    if opposition = direct:\n                        => win (n=36)\n                if defender_edge_distance = 1:\n                    => win (n=40)\n            if king_distance = 3:\n                => win (n=48)\n    if confinement_absolute = <=16 sq:\n        => draw (n=128)\n",
+          "train_accuracy": 0.990546218487395,
+          "train_baseline": 0.41281512605042014,
+          "transfers": [
+            {
+              "universe": "KR-K@5x5",
+              "solved_states": 18440,
+              "scored_states": 18440,
+              "sampled": false,
+              "accuracy": 0.6934924078091106,
+              "baseline": 0.4492407809110629,
+              "lift": 0.44348168570303265,
+              "fallback_rate": 0.039045553145336226,
+              "per_class": {
+                "win": 0.6346590909090909,
+                "loss": 0.7035248672139063,
+                "draw": 0.7997432605905006
+              }
+            },
+            {
+              "universe": "KR-K@6x6",
+              "solved_states": 62880,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.6129833333333333,
+              "baseline": 0.4718833333333333,
+              "lift": 0.2671758134250639,
+              "fallback_rate": 0.3671333333333333,
+              "per_class": {
+                "win": 0.5468807906114885,
+                "loss": 0.6386465581181789,
+                "draw": 0.7316941367198054
+              }
+            },
+            {
+              "universe": "KR-K@8x8",
+              "solved_states": 406336,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.8079,
+              "baseline": 0.5000666666666667,
+              "lift": 0.6157487665022002,
+              "fallback_rate": 0.7365833333333334,
+              "per_class": {
+                "win": 0.7904850818843117,
+                "loss": 0.8316891081189175,
+                "draw": 0.7458615061785964
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "train": {
+        "universe": "KQ-K@4x4",
+        "solved_states": 3308,
+        "scored_states": 3308,
+        "sampled": false
+      },
+      "variants": {
+        "fraction": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_bucket",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 34,
+          "rule_depth": 5,
+          "rule": "if mobility_bucket = 0:\n    if in_check = 0:\n        => draw (n=168)\n    if in_check = 1:\n        => loss (n=108)\nif mobility_bucket = 1:\n    if attacker_piece_en_prise = 0:\n        if confinement_bucket = <20%:\n            => loss (n=408)\n        if confinement_bucket = <40%:\n            => loss (n=160)\n        if confinement_bucket = >=40%:\n            => draw (n=32)\n    if attacker_piece_en_prise = 1:\n        => draw (n=244)\nif mobility_bucket = 2:\n    if attacker_piece_en_prise = 0:\n        if confinement_bucket = <20%:\n            => loss (n=156)\n        if confinement_bucket = <40%:\n            => loss (n=360)\n        if confinement_bucket = >=40%:\n            if in_check = 0:\n                => draw (n=24)\n            if in_check = 1:\n                => loss (n=24)\n    if attacker_piece_en_prise = 1:\n        => draw (n=280)\nif mobility_bucket = 3-4:\n    if confinement_bucket = <40%:\n        if attacker_piece_en_prise = 0:\n            => loss (n=184)\n        if attacker_piece_en_prise = 1:\n            => draw (n=44)\n    if confinement_bucket = >=40%:\n        if in_check = 0:\n            => draw (n=136)\n        if in_check = 1:\n            if attacker_piece_en_prise = 0:\n                => loss (n=32)\n            if attacker_piece_en_prise = 1:\n                => draw (n=8)\nif mobility_bucket = 5-8:\n    if confinement_bucket = <20%:\n        => win (n=16)\n    if confinement_bucket = <40%:\n        => win (n=24)\n    if confinement_bucket = >=40%:\n        if in_check = 0:\n            => draw (n=120)\n        if in_check = 1:\n            => loss (n=8)\nif mobility_bucket = 9+:\n    => win (n=772)\n",
+          "train_accuracy": 1.0,
+          "train_baseline": 0.43530834340991537,
+          "transfers": [
+            {
+              "universe": "KQ-K@5x5",
+              "solved_states": 16376,
+              "scored_states": 16376,
+              "sampled": false,
+              "accuracy": 0.9501709819247679,
+              "baseline": 0.4890083048363459,
+              "lift": 0.9024856596558315,
+              "fallback_rate": 0.06277479237909135,
+              "per_class": {
+                "win": 1.0,
+                "loss": 0.9095904095904096,
+                "draw": 0.972877358490566
+              }
+            },
+            {
+              "universe": "KQ-K@6x6",
+              "solved_states": 56800,
+              "scored_states": 56800,
+              "sampled": false,
+              "accuracy": 0.8773943661971831,
+              "baseline": 0.5153521126760563,
+              "lift": 0.7470212147631503,
+              "fallback_rate": 0.0978169014084507,
+              "per_class": {
+                "win": 1.0,
+                "loss": 0.7771248975129816,
+                "draw": 0.9461312438785504
+              }
+            },
+            {
+              "universe": "KQ-K@8x8",
+              "solved_states": 375676,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.7605166666666666,
+              "baseline": 0.5352833333333333,
+              "lift": 0.48466807732309997,
+              "fallback_rate": 0.1059,
+              "per_class": {
+                "win": 1.0,
+                "loss": 0.5697605629417443,
+                "draw": 0.8856846473029045
+              }
+            }
+          ]
+        },
+        "absolute": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_absolute",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 47,
+          "rule_depth": 7,
+          "rule": "if mobility_bucket = 0:\n    if in_check = 0:\n        => draw (n=168)\n    if in_check = 1:\n        => loss (n=108)\nif mobility_bucket = 1:\n    if attacker_piece_en_prise = 0:\n        if confinement_absolute = <=2 sq:\n            => loss (n=376)\n        if confinement_absolute = <=4 sq:\n            => loss (n=120)\n        if confinement_absolute = <=8 sq:\n            if in_check = 0:\n                => loss (n=24)\n            if in_check = 1:\n                => loss (n=56)\n        if confinement_absolute = <=16 sq:\n            => draw (n=24)\n    if attacker_piece_en_prise = 1:\n        => draw (n=244)\nif mobility_bucket = 2:\n    if attacker_piece_en_prise = 0:\n        if confinement_absolute = <=4 sq:\n            => loss (n=368)\n        if confinement_absolute = <=8 sq:\n            if in_check = 0:\n                if opposition = none:\n                    => loss (n=16)\n                if opposition = direct:\n                    if defender_edge_distance = 0:\n                        => loss (n=24)\n                    if defender_edge_distance = 1:\n                        => loss (n=8)\n            if in_check = 1:\n                => loss (n=136)\n        if confinement_absolute = <=16 sq:\n            => draw (n=12)\n    if attacker_piece_en_prise = 1:\n        => draw (n=280)\nif mobility_bucket = 3-4:\n    if confinement_absolute = <=4 sq:\n        if attacker_piece_en_prise = 0:\n            => loss (n=64)\n        if attacker_piece_en_prise = 1:\n            => draw (n=16)\n    if confinement_absolute = <=8 sq:\n        if attacker_piece_en_prise = 0:\n            if in_check = 0:\n                => loss (n=24)\n            if in_check = 1:\n                => loss (n=136)\n        if attacker_piece_en_prise = 1:\n            => draw (n=36)\n    if confinement_absolute = <=16 sq:\n        => draw (n=128)\nif mobility_bucket = 5-8:\n    if confinement_absolute = <=2 sq:\n        => win (n=8)\n    if confinement_absolute = <=4 sq:\n        => win (n=8)\n    if confinement_absolute = <=8 sq:\n        if in_check = 0:\n            if defender_edge_distance = 0:\n                if defender_corner_distance = 0:\n                    => draw (n=20)\n                if defender_corner_distance = 1:\n                    => draw (n=24)\n            if defender_edge_distance = 1:\n                => win (n=8)\n        if in_check = 1:\n            => loss (n=8)\n    if confinement_absolute = <=16 sq:\n        => draw (n=92)\nif mobility_bucket = 9+:\n    => win (n=772)\n",
+          "train_accuracy": 0.9866989117291415,
+          "train_baseline": 0.43530834340991537,
+          "transfers": [
+            {
+              "universe": "KQ-K@5x5",
+              "solved_states": 16376,
+              "scored_states": 16376,
+              "sampled": false,
+              "accuracy": 0.8234000977039571,
+              "baseline": 0.4890083048363459,
+              "lift": 0.654397705544933,
+              "fallback_rate": 0.040058622374206154,
+              "per_class": {
+                "win": 1.0,
+                "loss": 0.6713286713286714,
+                "draw": 0.9233490566037735
+              }
+            },
+            {
+              "universe": "KQ-K@6x6",
+              "solved_states": 56800,
+              "scored_states": 56800,
+              "sampled": false,
+              "accuracy": 0.7034507042253522,
+              "baseline": 0.5153521126760563,
+              "lift": 0.38811392037198506,
+              "fallback_rate": 0.13014084507042253,
+              "per_class": {
+                "win": 1.0,
+                "loss": 0.45777534845586226,
+                "draw": 0.8809990205680706
+              }
+            },
+            {
+              "universe": "KQ-K@8x8",
+              "solved_states": 375676,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.6679833333333334,
+              "baseline": 0.5352833333333333,
+              "lift": 0.2855503353297709,
+              "fallback_rate": 0.3891,
+              "per_class": {
+                "win": 1.0,
+                "loss": 0.4248840178098826,
+                "draw": 0.6991701244813278
+              }
+            }
+          ]
+        },
+        "both": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_bucket",
+            "confinement_absolute",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 35,
+          "rule_depth": 5,
+          "rule": "if mobility_bucket = 0:\n    if in_check = 0:\n        => draw (n=168)\n    if in_check = 1:\n        => loss (n=108)\nif mobility_bucket = 1:\n    if attacker_piece_en_prise = 0:\n        if confinement_bucket = <20%:\n            => loss (n=408)\n        if confinement_bucket = <40%:\n            => loss (n=160)\n        if confinement_bucket = >=40%:\n            => draw (n=32)\n    if attacker_piece_en_prise = 1:\n        => draw (n=244)\nif mobility_bucket = 2:\n    if attacker_piece_en_prise = 0:\n        if confinement_bucket = <20%:\n            => loss (n=156)\n        if confinement_bucket = <40%:\n            => loss (n=360)\n        if confinement_bucket = >=40%:\n            if in_check = 0:\n                => draw (n=24)\n            if in_check = 1:\n                => loss (n=24)\n    if attacker_piece_en_prise = 1:\n        => draw (n=280)\nif mobility_bucket = 3-4:\n    if confinement_absolute = <=4 sq:\n        if attacker_piece_en_prise = 0:\n            => loss (n=64)\n        if attacker_piece_en_prise = 1:\n            => draw (n=16)\n    if confinement_absolute = <=8 sq:\n        if attacker_piece_en_prise = 0:\n            if in_check = 0:\n                => loss (n=24)\n            if in_check = 1:\n                => loss (n=136)\n        if attacker_piece_en_prise = 1:\n            => draw (n=36)\n    if confinement_absolute = <=16 sq:\n        => draw (n=128)\nif mobility_bucket = 5-8:\n    if confinement_bucket = <20%:\n        => win (n=16)\n    if confinement_bucket = <40%:\n        => win (n=24)\n    if confinement_bucket = >=40%:\n        if in_check = 0:\n            => draw (n=120)\n        if in_check = 1:\n            => loss (n=8)\nif mobility_bucket = 9+:\n    => win (n=772)\n",
+          "train_accuracy": 0.9975816203143894,
+          "train_baseline": 0.43530834340991537,
+          "transfers": [
+            {
+              "universe": "KQ-K@5x5",
+              "solved_states": 16376,
+              "scored_states": 16376,
+              "sampled": false,
+              "accuracy": 0.8793356130923302,
+              "baseline": 0.4890083048363459,
+              "lift": 0.7638623326959846,
+              "fallback_rate": 0.05740107474352711,
+              "per_class": {
+                "win": 1.0,
+                "loss": 0.7807192807192808,
+                "draw": 0.9351415094339622
+              }
+            },
+            {
+              "universe": "KQ-K@6x6",
+              "solved_states": 56800,
+              "scored_states": 56800,
+              "sampled": false,
+              "accuracy": 0.7694366197183099,
+              "baseline": 0.5153521126760563,
+              "lift": 0.5242662016855566,
+              "fallback_rate": 0.09147887323943663,
+              "per_class": {
+                "win": 1.0,
+                "loss": 0.5833561082262914,
+                "draw": 0.8898139079333987
+              }
+            },
+            {
+              "universe": "KQ-K@8x8",
+              "solved_states": 375676,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.7196,
+              "baseline": 0.5352833333333333,
+              "lift": 0.39662159738909014,
+              "fallback_rate": 0.19515,
+              "per_class": {
+                "win": 1.0,
+                "loss": 0.5208145219042875,
+                "draw": 0.7024896265560165
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "train": {
+        "universe": "KR-K@4x4",
+        "solved_states": 3808,
+        "scored_states": 3808,
+        "sampled": false
+      },
+      "variants": {
+        "fraction": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_bucket",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 39,
+          "rule_depth": 7,
+          "rule": "if stm_is_stronger = 0:\n    if attacker_piece_en_prise = 0:\n        if confinement_bucket = <10%:\n            if in_check = 0:\n                => draw (n=36)\n            if in_check = 1:\n                => loss (n=32)\n        if confinement_bucket = <20%:\n            => loss (n=464)\n        if confinement_bucket = <40%:\n            => loss (n=716)\n        if confinement_bucket = >=40%:\n            if in_check = 0:\n                if mobility_bucket = 1:\n                    => draw (n=24)\n                if mobility_bucket = 2:\n                    => draw (n=12)\n                if mobility_bucket = 3-4:\n                    if defender_edge_distance = 0:\n                        => draw (n=124)\n                    if defender_edge_distance = 1:\n                        => loss (n=16)\n                if mobility_bucket = 5-8:\n                    if opposition = none:\n                        => draw (n=80)\n                    if opposition = direct:\n                        => draw (n=12)\n            if in_check = 1:\n                => loss (n=248)\n    if attacker_piece_en_prise = 1:\n        => draw (n=576)\nif stm_is_stronger = 1:\n    if confinement_bucket = <10%:\n        => win (n=80)\n    if confinement_bucket = <20%:\n        => win (n=536)\n    if confinement_bucket = <40%:\n        => win (n=576)\n    if confinement_bucket = >=40%:\n        if mobility_bucket = 1:\n            => draw (n=16)\n        if mobility_bucket = 2:\n            => draw (n=12)\n        if mobility_bucket = 3-4:\n            if defender_edge_distance = 0:\n                => draw (n=60)\n            if defender_edge_distance = 1:\n                => win (n=16)\n        if mobility_bucket = 5-8:\n            if defender_edge_distance = 0:\n                if defender_corner_distance = 0:\n                    if opposition = none:\n                        => draw (n=40)\n                    if opposition = direct:\n                        => win (n=12)\n                if defender_corner_distance = 1:\n                    if king_distance = 2:\n                        => win (n=40)\n                    if king_distance = 3:\n                        => win (n=48)\n            if defender_edge_distance = 1:\n                => win (n=32)\n",
+          "train_accuracy": 0.9590336134453782,
+          "train_baseline": 0.41281512605042014,
+          "transfers": [
+            {
+              "universe": "KQ-K@5x5",
+              "solved_states": 16376,
+              "scored_states": 16376,
+              "sampled": false,
+              "accuracy": 0.870542256961407,
+              "baseline": 0.4890083048363459,
+              "lift": 0.7466539196940726,
+              "fallback_rate": 0.08207132388861749,
+              "per_class": {
+                "win": 0.9003215434083601,
+                "loss": 0.8711288711288712,
+                "draw": 0.8254716981132075
+              }
+            },
+            {
+              "universe": "KQ-K@8x8",
+              "solved_states": 375676,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.7332166666666666,
+              "baseline": 0.5352833333333333,
+              "lift": 0.42592260517160985,
+              "fallback_rate": 0.16253333333333334,
+              "per_class": {
+                "win": 0.6995620691150327,
+                "loss": 0.7369928698197217,
+                "draw": 0.8690871369294606
+              }
+            }
+          ]
+        },
+        "absolute": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_absolute",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 34,
+          "rule_depth": 7,
+          "rule": "if stm_is_stronger = 0:\n    if attacker_piece_en_prise = 0:\n        if confinement_absolute = <=1 sq:\n            if in_check = 0:\n                => draw (n=36)\n            if in_check = 1:\n                => loss (n=32)\n        if confinement_absolute = <=2 sq:\n            => loss (n=224)\n        if confinement_absolute = <=4 sq:\n            => loss (n=512)\n        if confinement_absolute = <=8 sq:\n            if king_distance = 2:\n                if defender_edge_distance = 0:\n                    if in_check = 0:\n                        => loss (n=192)\n                    if in_check = 1:\n                        => loss (n=104)\n                if defender_edge_distance = 1:\n                    => loss (n=160)\n            if king_distance = 3:\n                => loss (n=320)\n        if confinement_absolute = <=16 sq:\n            if in_check = 0:\n                => draw (n=128)\n            if in_check = 1:\n                => loss (n=56)\n    if attacker_piece_en_prise = 1:\n        => draw (n=576)\nif stm_is_stronger = 1:\n    if confinement_absolute = <=1 sq:\n        => win (n=80)\n    if confinement_absolute = <=2 sq:\n        => win (n=272)\n    if confinement_absolute = <=4 sq:\n        => win (n=472)\n    if confinement_absolute = <=8 sq:\n        if slider_cuts_between_kings = 0:\n            if mobility_bucket = 3-4:\n                => win (n=8)\n            if mobility_bucket = 5-8:\n                if defender_edge_distance = 0:\n                    if king_distance = 2:\n                        => win (n=116)\n                    if king_distance = 3:\n                        => win (n=48)\n                if defender_edge_distance = 1:\n                    => win (n=68)\n            if mobility_bucket = 9+:\n                => win (n=84)\n        if slider_cuts_between_kings = 1:\n            => win (n=192)\n    if confinement_absolute = <=16 sq:\n        => draw (n=128)\n",
+          "train_accuracy": 0.9852941176470589,
+          "train_baseline": 0.41281512605042014,
+          "transfers": [
+            {
+              "universe": "KQ-K@5x5",
+              "solved_states": 16376,
+              "scored_states": 16376,
+              "sampled": false,
+              "accuracy": 0.830972154372252,
+              "baseline": 0.4890083048363459,
+              "lift": 0.6692160611854683,
+              "fallback_rate": 0.07816316560820713,
+              "per_class": {
+                "win": 0.7845659163987139,
+                "loss": 0.8661338661338661,
+                "draw": 0.8160377358490566
+              }
+            },
+            {
+              "universe": "KQ-K@8x8",
+              "solved_states": 375676,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.7866166666666666,
+              "baseline": 0.5352833333333333,
+              "lift": 0.5408313309184807,
+              "fallback_rate": 0.6195166666666667,
+              "per_class": {
+                "win": 0.7481247019034818,
+                "loss": 0.818258243297942,
+                "draw": 0.7599585062240664
+              }
+            }
+          ]
+        },
+        "both": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_bucket",
+            "confinement_absolute",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 35,
+          "rule_depth": 7,
+          "rule": "if stm_is_stronger = 0:\n    if attacker_piece_en_prise = 0:\n        if confinement_absolute = <=1 sq:\n            if in_check = 0:\n                => draw (n=36)\n            if in_check = 1:\n                => loss (n=32)\n        if confinement_absolute = <=2 sq:\n            => loss (n=224)\n        if confinement_absolute = <=4 sq:\n            => loss (n=512)\n        if confinement_absolute = <=8 sq:\n            if confinement_bucket = <40%:\n                => loss (n=444)\n            if confinement_bucket = >=40%:\n                if in_check = 0:\n                    if mobility_bucket = 1:\n                        => loss (n=16)\n                    if mobility_bucket = 2:\n                        => draw (n=12)\n                    if mobility_bucket = 3-4:\n                        => loss (n=80)\n                    if mobility_bucket = 5-8:\n                        => loss (n=32)\n                if in_check = 1:\n                    => loss (n=192)\n        if confinement_absolute = <=16 sq:\n            if in_check = 0:\n                => draw (n=128)\n            if in_check = 1:\n                => loss (n=56)\n    if attacker_piece_en_prise = 1:\n        => draw (n=576)\nif stm_is_stronger = 1:\n    if confinement_absolute = <=1 sq:\n        => win (n=80)\n    if confinement_absolute = <=2 sq:\n        => win (n=272)\n    if confinement_absolute = <=4 sq:\n        => win (n=472)\n    if confinement_absolute = <=8 sq:\n        if confinement_bucket = <40%:\n            => win (n=368)\n        if confinement_bucket = >=40%:\n            if king_distance = 2:\n                if defender_edge_distance = 0:\n                    if opposition = none:\n                        => draw (n=24)\n                    if opposition = direct:\n                        => win (n=36)\n                if defender_edge_distance = 1:\n                    => win (n=40)\n            if king_distance = 3:\n                => win (n=48)\n    if confinement_absolute = <=16 sq:\n        => draw (n=128)\n",
+          "train_accuracy": 0.990546218487395,
+          "train_baseline": 0.41281512605042014,
+          "transfers": [
+            {
+              "universe": "KQ-K@5x5",
+              "solved_states": 16376,
+              "scored_states": 16376,
+              "sampled": false,
+              "accuracy": 0.830972154372252,
+              "baseline": 0.4890083048363459,
+              "lift": 0.6692160611854683,
+              "fallback_rate": 0.038104543234000976,
+              "per_class": {
+                "win": 0.7845659163987139,
+                "loss": 0.8661338661338661,
+                "draw": 0.8160377358490566
+              }
+            },
+            {
+              "universe": "KQ-K@8x8",
+              "solved_states": 375676,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.7866166666666666,
+              "baseline": 0.5352833333333333,
+              "lift": 0.5408313309184807,
+              "fallback_rate": 0.6739333333333334,
+              "per_class": {
+                "win": 0.7481247019034818,
+                "loss": 0.818258243297942,
+                "draw": 0.7599585062240664
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "train": {
+        "universe": "KP-K@4x4",
+        "solved_states": 18740,
+        "scored_states": 18740,
+        "sampled": false
+      },
+      "variants": {
+        "fraction": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_bucket",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 161,
+          "rule_depth": 7,
+          "rule": "if stm_is_stronger = 0:\n    if attacker_piece_en_prise = 0:\n        if confinement_bucket = <10%:\n            if in_check = 0:\n                => draw (n=318)\n            if in_check = 1:\n                => loss (n=124)\n        if confinement_bucket = <20%:\n            if king_distance = 2:\n                if defender_corner_distance = 0:\n                    if mobility_bucket = 1:\n                        => loss (n=272)\n                    if mobility_bucket = 2:\n                        => draw (n=12)\n                if defender_corner_distance = 1:\n                    if in_check = 0:\n                        => loss (n=414)\n                    if in_check = 1:\n                        => loss (n=160)\n            if king_distance = 3:\n                => loss (n=356)\n        if confinement_bucket = <40%:\n            if in_check = 0:\n                if mobility_bucket = 1:\n                    if opposition = none:\n                        => draw (n=204)\n                    if opposition = direct:\n                        => loss (n=118)\n                if mobility_bucket = 2:\n                    if defender_edge_distance = 0:\n                        => draw (n=506)\n                    if defender_edge_distance = 1:\n                        => loss (n=32)\n                if mobility_bucket = 3-4:\n                    if defender_corner_distance = 0:\n                        => loss (n=86)\n                    if defender_corner_distance = 1:\n                        => loss (n=520)\n                if mobility_bucket = 5-8:\n                    => loss (n=80)\n            if in_check = 1:\n                if king_distance = 2:\n                    if defender_edge_distance = 0:\n                        => loss (n=326)\n                    if defender_edge_distance = 1:\n                        => loss (n=108)\n                if king_distance = 3:\n                    => loss (n=232)\n        if confinement_bucket = >=40%:\n            if slider_cuts_between_kings = 0:\n                if in_check = 0:\n                    if mobility_bucket = 1:\n                        => draw (n=290)\n                    if mobility_bucket = 2:\n                        => draw (n=490)\n                    if mobility_bucket = 3-4:\n                        => draw (n=1356)\n                    if mobility_bucket = 5-8:\n                        => draw (n=598)\n                if in_check = 1:\n                    if king_distance = 2:\n                        => draw (n=320)\n                    if king_distance = 3:\n                        => loss (n=116)\n            if slider_cuts_between_kings = 1:\n                if in_check = 0:\n                    => draw (n=632)\n                if in_check = 1:\n                    if mobility_bucket = 1:\n                        => draw (n=16)\n                    if mobility_bucket = 2:\n                        => loss (n=94)\n                    if mobility_bucket = 3-4:\n                        => draw (n=284)\n                    if mobility_bucket = 5-8:\n                        => draw (n=76)\n    if attacker_piece_en_prise = 1:\n        => draw (n=2866)\nif stm_is_stronger = 1:\n    if mobility_bucket = 0:\n        => draw (n=8)\n    if mobility_bucket = 1:\n        if attacker_piece_en_prise = 0:\n            if opposition = none:\n                => draw (n=32)\n            if opposition = direct:\n                => draw (n=48)\n        if attacker_piece_en_prise = 1:\n            => draw (n=26)\n    if mobility_bucket = 2:\n        if defender_edge_distance = 0:\n            if attacker_piece_en_prise = 0:\n                if king_distance = 2:\n                    if opposition = none:\n                        => draw (n=20)\n                    if opposition = direct:\n                        => draw (n=46)\n                if king_distance = 3:\n                    => win (n=28)\n            if attacker_piece_en_prise = 1:\n                => win (n=8)\n        if defender_edge_distance = 1:\n            if attacker_piece_en_prise = 0:\n                if opposition = none:\n                    => draw (n=34)\n                if opposition = direct:\n                    => draw (n=44)\n            if attacker_piece_en_prise = 1:\n                => draw (n=32)\n    if mobility_bucket = 3-4:\n        if defender_edge_distance = 0:\n            if opposition = none:\n                if defender_corner_distance = 0:\n                    if attacker_piece_en_prise = 0:\n                        => draw (n=130)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=30)\n                if defender_corner_distance = 1:\n                    if king_distance = 2:\n                        => draw (n=188)\n                    if king_distance = 3:\n                        => draw (n=196)\n            if opposition = direct:\n                if defender_corner_distance = 0:\n                    if confinement_bucket = <10%:\n                        => win (n=14)\n                    if confinement_bucket = >=40%:\n                        => draw (n=88)\n                if defender_corner_distance = 1:\n                    if confinement_bucket = <40%:\n                        => win (n=2)\n                    if confinement_bucket = >=40%:\n                        => draw (n=218)\n        if defender_edge_distance = 1:\n            if opposition = none:\n                if slider_cuts_between_kings = 0:\n                    if attacker_piece_en_prise = 0:\n                        => draw (n=108)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=72)\n                if slider_cuts_between_kings = 1:\n                    => draw (n=32)\n            if opposition = direct:\n                if slider_cuts_between_kings = 0:\n                    if attacker_piece_en_prise = 0:\n                        => draw (n=66)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=30)\n                if slider_cuts_between_kings = 1:\n                    => draw (n=8)\n    if mobility_bucket = 5-8:\n        if confinement_bucket = <10%:\n            if slider_cuts_between_kings = 0:\n                if defender_corner_distance = 0:\n                    if opposition = none:\n                        => draw (n=22)\n                    if opposition = direct:\n                        => win (n=38)\n                if defender_corner_distance = 1:\n                    => win (n=18)\n            if slider_cuts_between_kings = 1:\n                => draw (n=42)\n        if confinement_bucket = <20%:\n            if king_distance = 2:\n                if defender_edge_distance = 0:\n                    if attacker_piece_en_prise = 0:\n                        => win (n=142)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=30)\n                if defender_edge_distance = 1:\n                    => win (n=32)\n            if king_distance = 3:\n                => win (n=48)\n        if confinement_bucket = <40%:\n            if defender_edge_distance = 0:\n                if attacker_piece_en_prise = 0:\n                    if defender_corner_distance = 0:\n                        => draw (n=240)\n                    if defender_corner_distance = 1:\n                        => draw (n=482)\n                if attacker_piece_en_prise = 1:\n                    if king_distance = 2:\n                        => draw (n=102)\n                    if king_distance = 3:\n                        => draw (n=32)\n            if defender_edge_distance = 1:\n                if attacker_piece_en_prise = 0:\n                    if slider_cuts_between_kings = 0:\n                        => win (n=48)\n                    if slider_cuts_between_kings = 1:\n                        => win (n=100)\n                if attacker_piece_en_prise = 1:\n                    if slider_cuts_between_kings = 0:\n                        => draw (n=70)\n                    if slider_cuts_between_kings = 1:\n                        => win (n=24)\n        if confinement_bucket = >=40%:\n            if slider_cuts_between_kings = 0:\n                if attacker_piece_en_prise = 0:\n                    if defender_edge_distance = 0:\n                        => draw (n=1456)\n                    if defender_edge_distance = 1:\n                        => draw (n=152)\n                if attacker_piece_en_prise = 1:\n                    if defender_corner_distance = 0:\n                        => draw (n=64)\n                    if defender_corner_distance = 1:\n                        => draw (n=408)\n            if slider_cuts_between_kings = 1:\n                => draw (n=788)\n    if mobility_bucket = 9+:\n        if king_distance = 2:\n            if defender_edge_distance = 0:\n                if attacker_piece_en_prise = 0:\n                    if confinement_bucket = <10%:\n                        => win (n=158)\n                    if confinement_bucket = <20%:\n                        => win (n=454)\n                    if confinement_bucket = <40%:\n                        => win (n=330)\n                    if confinement_bucket = >=40%:\n                        => win (n=10)\n                if attacker_piece_en_prise = 1:\n                    if defender_corner_distance = 0:\n                        => draw (n=16)\n                    if defender_corner_distance = 1:\n                        => win (n=52)\n            if defender_edge_distance = 1:\n                => win (n=104)\n        if king_distance = 3:\n            if confinement_bucket = <10%:\n                => win (n=84)\n            if confinement_bucket = <20%:\n                => win (n=296)\n            if confinement_bucket = <40%:\n                if attacker_piece_en_prise = 0:\n                    if defender_corner_distance = 0:\n                        => win (n=106)\n                    if defender_corner_distance = 1:\n                        => win (n=176)\n                if attacker_piece_en_prise = 1:\n                    if slider_cuts_between_kings = 0:\n                        => win (n=4)\n                    if slider_cuts_between_kings = 1:\n                        => draw (n=40)\n            if confinement_bucket = >=40%:\n                if slider_cuts_between_kings = 0:\n                    => win (n=34)\n                if slider_cuts_between_kings = 1:\n                    => draw (n=24)\n",
+          "train_accuracy": 0.8299893276414088,
+          "train_baseline": 0.6370330843116329,
+          "transfers": [
+            {
+              "universe": "KP-K@5x5",
+              "solved_states": 92416,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.76205,
+              "baseline": 0.5962166666666666,
+              "lift": 0.41069880711602763,
+              "fallback_rate": 0.13043333333333335,
+              "per_class": {
+                "win": 0.7153485076609689,
+                "loss": 0.5205627705627706,
+                "draw": 0.8641153942917843
+              }
+            },
+            {
+              "universe": "KP-K@4x6",
+              "solved_states": 80624,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.7724666666666666,
+              "baseline": 0.6069,
+              "lift": 0.42118205715254803,
+              "fallback_rate": 0.12636666666666665,
+              "per_class": {
+                "win": 0.7155830003632401,
+                "loss": 0.5468426912676952,
+                "draw": 0.8675784039105838
+              }
+            },
+            {
+              "universe": "KP-K@6x6",
+              "solved_states": 317572,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.71,
+              "baseline": 0.56825,
+              "lift": 0.3283149971048059,
+              "fallback_rate": 0.232,
+              "per_class": {
+                "win": 0.773589554077359,
+                "loss": 0.489729020979021,
+                "draw": 0.7759788825340959
+              }
+            }
+          ]
+        },
+        "absolute": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_absolute",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 192,
+          "rule_depth": 7,
+          "rule": "if stm_is_stronger = 0:\n    if attacker_piece_en_prise = 0:\n        if confinement_absolute = <=1 sq:\n            if in_check = 0:\n                => draw (n=318)\n            if in_check = 1:\n                => loss (n=124)\n        if confinement_absolute = <=2 sq:\n            if king_distance = 2:\n                if defender_corner_distance = 0:\n                    if opposition = none:\n                        => loss (n=128)\n                    if opposition = direct:\n                        => loss (n=80)\n                if defender_corner_distance = 1:\n                    if in_check = 0:\n                        => loss (n=254)\n                    if in_check = 1:\n                        => loss (n=80)\n            if king_distance = 3:\n                => loss (n=200)\n        if confinement_absolute = <=4 sq:\n            if king_distance = 2:\n                if defender_edge_distance = 0:\n                    if mobility_bucket = 1:\n                        => loss (n=296)\n                    if mobility_bucket = 2:\n                        => loss (n=332)\n                    if mobility_bucket = 3-4:\n                        => loss (n=64)\n                if defender_edge_distance = 1:\n                    => loss (n=160)\n            if king_distance = 3:\n                => loss (n=408)\n        if confinement_absolute = <=8 sq:\n            if in_check = 0:\n                if mobility_bucket = 1:\n                    if slider_cuts_between_kings = 0:\n                        => draw (n=370)\n                    if slider_cuts_between_kings = 1:\n                        => draw (n=84)\n                if mobility_bucket = 2:\n                    if slider_cuts_between_kings = 0:\n                        => draw (n=558)\n                    if slider_cuts_between_kings = 1:\n                        => draw (n=260)\n                if mobility_bucket = 3-4:\n                    if defender_corner_distance = 0:\n                        => draw (n=176)\n                    if defender_corner_distance = 1:\n                        => draw (n=1088)\n                if mobility_bucket = 5-8:\n                    if slider_cuts_between_kings = 0:\n                        => draw (n=146)\n                    if slider_cuts_between_kings = 1:\n                        => loss (n=68)\n            if in_check = 1:\n                if slider_cuts_between_kings = 0:\n                    if king_distance = 2:\n                        => loss (n=332)\n                    if king_distance = 3:\n                        => loss (n=192)\n                if slider_cuts_between_kings = 1:\n                    if mobility_bucket = 1:\n                        => loss (n=72)\n                    if mobility_bucket = 2:\n                        => loss (n=130)\n                    if mobility_bucket = 3-4:\n                        => draw (n=216)\n        if confinement_absolute = <=16 sq:\n            if slider_cuts_between_kings = 0:\n                if mobility_bucket = 1:\n                    if in_check = 0:\n                        => draw (n=66)\n                    if in_check = 1:\n                        => draw (n=4)\n                if mobility_bucket = 2:\n                    if in_check = 0:\n                        => draw (n=178)\n                    if in_check = 1:\n                        => draw (n=22)\n                if mobility_bucket = 3-4:\n                    if king_distance = 2:\n                        => draw (n=362)\n                    if king_distance = 3:\n                        => draw (n=424)\n                if mobility_bucket = 5-8:\n                    if in_check = 0:\n                        => draw (n=468)\n                    if in_check = 1:\n                        => draw (n=108)\n            if slider_cuts_between_kings = 1:\n                => draw (n=372)\n    if attacker_piece_en_prise = 1:\n        => draw (n=2866)\nif stm_is_stronger = 1:\n    if mobility_bucket = 0:\n        => draw (n=8)\n    if mobility_bucket = 1:\n        if attacker_piece_en_prise = 0:\n            if opposition = none:\n                => draw (n=32)\n            if opposition = direct:\n                => draw (n=48)\n        if attacker_piece_en_prise = 1:\n            => draw (n=26)\n    if mobility_bucket = 2:\n        if defender_edge_distance = 0:\n            if attacker_piece_en_prise = 0:\n                if king_distance = 2:\n                    if opposition = none:\n                        => draw (n=20)\n                    if opposition = direct:\n                        => draw (n=46)\n                if king_distance = 3:\n                    => win (n=28)\n            if attacker_piece_en_prise = 1:\n                => win (n=8)\n        if defender_edge_distance = 1:\n            if attacker_piece_en_prise = 0:\n                if confinement_absolute = <=8 sq:\n                    => draw (n=6)\n                if confinement_absolute = <=16 sq:\n                    if opposition = none:\n                        => draw (n=34)\n                    if opposition = direct:\n                        => draw (n=38)\n            if attacker_piece_en_prise = 1:\n                => draw (n=32)\n    if mobility_bucket = 3-4:\n        if defender_edge_distance = 0:\n            if opposition = none:\n                if confinement_absolute = <=8 sq:\n                    => win (n=72)\n                if confinement_absolute = <=16 sq:\n                    if king_distance = 2:\n                        => draw (n=116)\n                    if king_distance = 3:\n                        => draw (n=356)\n            if opposition = direct:\n                if defender_corner_distance = 0:\n                    if confinement_absolute = <=1 sq:\n                        => win (n=14)\n                    if confinement_absolute = <=8 sq:\n                        => win (n=36)\n                    if confinement_absolute = <=16 sq:\n                        => draw (n=52)\n                if defender_corner_distance = 1:\n                    if slider_cuts_between_kings = 0:\n                        => draw (n=188)\n                    if slider_cuts_between_kings = 1:\n                        => draw (n=32)\n        if defender_edge_distance = 1:\n            if opposition = none:\n                if slider_cuts_between_kings = 0:\n                    if attacker_piece_en_prise = 0:\n                        => draw (n=108)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=72)\n                if slider_cuts_between_kings = 1:\n                    => draw (n=32)\n            if opposition = direct:\n                if slider_cuts_between_kings = 0:\n                    if confinement_absolute = <=8 sq:\n                        => draw (n=70)\n                    if confinement_absolute = <=16 sq:\n                        => draw (n=26)\n                if slider_cuts_between_kings = 1:\n                    => draw (n=8)\n    if mobility_bucket = 5-8:\n        if confinement_absolute = <=1 sq:\n            if slider_cuts_between_kings = 0:\n                if defender_corner_distance = 0:\n                    if opposition = none:\n                        => draw (n=22)\n                    if opposition = direct:\n                        => win (n=38)\n                if defender_corner_distance = 1:\n                    => win (n=18)\n            if slider_cuts_between_kings = 1:\n                => draw (n=42)\n        if confinement_absolute = <=2 sq:\n            if king_distance = 2:\n                if defender_edge_distance = 0:\n                    if attacker_piece_en_prise = 0:\n                        => win (n=126)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=30)\n                if defender_edge_distance = 1:\n                    => win (n=16)\n            if king_distance = 3:\n                => win (n=16)\n        if confinement_absolute = <=4 sq:\n            if slider_cuts_between_kings = 0:\n                if defender_edge_distance = 0:\n                    if king_distance = 2:\n                        => draw (n=108)\n                    if king_distance = 3:\n                        => win (n=32)\n                if defender_edge_distance = 1:\n                    => win (n=40)\n            if slider_cuts_between_kings = 1:\n                => win (n=112)\n        if confinement_absolute = <=8 sq:\n            if slider_cuts_between_kings = 0:\n                if attacker_piece_en_prise = 0:\n                    if defender_edge_distance = 0:\n                        => draw (n=1338)\n                    if defender_edge_distance = 1:\n                        => draw (n=142)\n                if attacker_piece_en_prise = 1:\n                    if opposition = none:\n                        => draw (n=350)\n                    if opposition = direct:\n                        => draw (n=132)\n            if slider_cuts_between_kings = 1:\n                if defender_edge_distance = 0:\n                    if attacker_piece_en_prise = 0:\n                        => draw (n=540)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=176)\n                if defender_edge_distance = 1:\n                    if attacker_piece_en_prise = 0:\n                        => draw (n=132)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=32)\n        if confinement_absolute = <=16 sq:\n            if slider_cuts_between_kings = 0:\n                if king_distance = 2:\n                    if attacker_piece_en_prise = 0:\n                        => win (n=106)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=48)\n                if king_distance = 3:\n                    if attacker_piece_en_prise = 0:\n                        => draw (n=424)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=98)\n            if slider_cuts_between_kings = 1:\n                => draw (n=220)\n    if mobility_bucket = 9+:\n        if confinement_absolute = <=1 sq:\n            if king_distance = 2:\n                if attacker_piece_en_prise = 0:\n                    if opposition = none:\n                        => win (n=66)\n                    if opposition = direct:\n                        => win (n=92)\n                if attacker_piece_en_prise = 1:\n                    => draw (n=8)\n            if king_distance = 3:\n                => win (n=84)\n        if confinement_absolute = <=2 sq:\n            if king_distance = 2:\n                if defender_corner_distance = 0:\n                    if attacker_piece_en_prise = 0:\n                        => win (n=132)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=8)\n                if defender_corner_distance = 1:\n                    if opposition = none:\n                        => win (n=96)\n                    if opposition = direct:\n                        => win (n=84)\n            if king_distance = 3:\n                => win (n=192)\n        if confinement_absolute = <=4 sq:\n            if king_distance = 2:\n                if defender_edge_distance = 0:\n                    if defender_corner_distance = 0:\n                        => win (n=102)\n                    if defender_corner_distance = 1:\n                        => win (n=238)\n                if defender_edge_distance = 1:\n                    => win (n=80)\n            if king_distance = 3:\n                => win (n=256)\n        if confinement_absolute = <=8 sq:\n            if slider_cuts_between_kings = 0:\n                if king_distance = 2:\n                    if defender_edge_distance = 0:\n                        => win (n=158)\n                    if defender_edge_distance = 1:\n                        => win (n=8)\n                if king_distance = 3:\n                    => win (n=80)\n            if slider_cuts_between_kings = 1:\n                if attacker_piece_en_prise = 0:\n                    if defender_corner_distance = 0:\n                        => draw (n=52)\n                    if defender_corner_distance = 1:\n                        => win (n=96)\n                if attacker_piece_en_prise = 1:\n                    if defender_edge_distance = 0:\n                        => draw (n=48)\n                    if defender_edge_distance = 1:\n                        => win (n=8)\n",
+          "train_accuracy": 0.8281750266808965,
+          "train_baseline": 0.6370330843116329,
+          "transfers": [
+            {
+              "universe": "KP-K@5x5",
+              "solved_states": 92416,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.6775333333333333,
+              "baseline": 0.5962166666666666,
+              "lift": 0.20138688240392957,
+              "fallback_rate": 0.3576166666666667,
+              "per_class": {
+                "win": 0.775662031706669,
+                "loss": 0.3072047000618429,
+                "draw": 0.780476895983004
+              }
+            },
+            {
+              "universe": "KP-K@4x6",
+              "solved_states": 80624,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.7009666666666666,
+              "baseline": 0.6069,
+              "lift": 0.2392944967353514,
+              "fallback_rate": 0.2844,
+              "per_class": {
+                "win": 0.7796040682891391,
+                "loss": 0.3421345633847622,
+                "draw": 0.8010929862140935
+              }
+            },
+            {
+              "universe": "KP-K@6x6",
+              "solved_states": 317572,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.61525,
+              "baseline": 0.56825,
+              "lift": 0.10885929357266921,
+              "fallback_rate": 0.7471666666666666,
+              "per_class": {
+                "win": 0.7782705099778271,
+                "loss": 0.1460518648018648,
+                "draw": 0.7459451532482769
+              }
+            }
+          ]
+        },
+        "both": {
+          "features": [
+            "in_check",
+            "stm_is_stronger",
+            "king_distance",
+            "defender_edge_distance",
+            "defender_corner_distance",
+            "opposition",
+            "mobility_bucket",
+            "confinement_bucket",
+            "confinement_absolute",
+            "attacker_piece_en_prise",
+            "slider_cuts_between_kings",
+            "defender_has_material"
+          ],
+          "rule_nodes": 177,
+          "rule_depth": 7,
+          "rule": "if stm_is_stronger = 0:\n    if attacker_piece_en_prise = 0:\n        if confinement_bucket = <10%:\n            if in_check = 0:\n                => draw (n=318)\n            if in_check = 1:\n                => loss (n=124)\n        if confinement_bucket = <20%:\n            if king_distance = 2:\n                if defender_corner_distance = 0:\n                    if mobility_bucket = 1:\n                        => loss (n=272)\n                    if mobility_bucket = 2:\n                        => draw (n=12)\n                if defender_corner_distance = 1:\n                    if in_check = 0:\n                        => loss (n=414)\n                    if in_check = 1:\n                        => loss (n=160)\n            if king_distance = 3:\n                => loss (n=356)\n        if confinement_bucket = <40%:\n            if in_check = 0:\n                if mobility_bucket = 1:\n                    if opposition = none:\n                        => draw (n=204)\n                    if opposition = direct:\n                        => loss (n=118)\n                if mobility_bucket = 2:\n                    if confinement_absolute = <=4 sq:\n                        => loss (n=192)\n                    if confinement_absolute = <=8 sq:\n                        => draw (n=346)\n                if mobility_bucket = 3-4:\n                    if confinement_absolute = <=4 sq:\n                        => loss (n=224)\n                    if confinement_absolute = <=8 sq:\n                        => loss (n=382)\n                if mobility_bucket = 5-8:\n                    => loss (n=80)\n            if in_check = 1:\n                if king_distance = 2:\n                    if defender_edge_distance = 0:\n                        => loss (n=326)\n                    if defender_edge_distance = 1:\n                        => loss (n=108)\n                if king_distance = 3:\n                    => loss (n=232)\n        if confinement_bucket = >=40%:\n            if slider_cuts_between_kings = 0:\n                if in_check = 0:\n                    if mobility_bucket = 1:\n                        => draw (n=290)\n                    if mobility_bucket = 2:\n                        => draw (n=490)\n                    if mobility_bucket = 3-4:\n                        => draw (n=1356)\n                    if mobility_bucket = 5-8:\n                        => draw (n=598)\n                if in_check = 1:\n                    if king_distance = 2:\n                        => draw (n=320)\n                    if king_distance = 3:\n                        => loss (n=116)\n            if slider_cuts_between_kings = 1:\n                if in_check = 0:\n                    => draw (n=632)\n                if in_check = 1:\n                    if confinement_absolute = <=8 sq:\n                        => draw (n=274)\n                    if confinement_absolute = <=16 sq:\n                        => draw (n=196)\n    if attacker_piece_en_prise = 1:\n        => draw (n=2866)\nif stm_is_stronger = 1:\n    if mobility_bucket = 0:\n        => draw (n=8)\n    if mobility_bucket = 1:\n        if attacker_piece_en_prise = 0:\n            if opposition = none:\n                => draw (n=32)\n            if opposition = direct:\n                => draw (n=48)\n        if attacker_piece_en_prise = 1:\n            => draw (n=26)\n    if mobility_bucket = 2:\n        if defender_edge_distance = 0:\n            if attacker_piece_en_prise = 0:\n                if king_distance = 2:\n                    if opposition = none:\n                        => draw (n=20)\n                    if opposition = direct:\n                        => draw (n=46)\n                if king_distance = 3:\n                    => win (n=28)\n            if attacker_piece_en_prise = 1:\n                => win (n=8)\n        if defender_edge_distance = 1:\n            if attacker_piece_en_prise = 0:\n                if confinement_absolute = <=8 sq:\n                    => draw (n=6)\n                if confinement_absolute = <=16 sq:\n                    if opposition = none:\n                        => draw (n=34)\n                    if opposition = direct:\n                        => draw (n=38)\n            if attacker_piece_en_prise = 1:\n                => draw (n=32)\n    if mobility_bucket = 3-4:\n        if defender_edge_distance = 0:\n            if opposition = none:\n                if confinement_absolute = <=8 sq:\n                    => win (n=72)\n                if confinement_absolute = <=16 sq:\n                    if king_distance = 2:\n                        => draw (n=116)\n                    if king_distance = 3:\n                        => draw (n=356)\n            if opposition = direct:\n                if defender_corner_distance = 0:\n                    if confinement_absolute = <=1 sq:\n                        => win (n=14)\n                    if confinement_absolute = <=8 sq:\n                        => win (n=36)\n                    if confinement_absolute = <=16 sq:\n                        => draw (n=52)\n                if defender_corner_distance = 1:\n                    if confinement_bucket = <40%:\n                        => win (n=2)\n                    if confinement_bucket = >=40%:\n                        => draw (n=218)\n        if defender_edge_distance = 1:\n            if opposition = none:\n                if slider_cuts_between_kings = 0:\n                    if attacker_piece_en_prise = 0:\n                        => draw (n=108)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=72)\n                if slider_cuts_between_kings = 1:\n                    => draw (n=32)\n            if opposition = direct:\n                if slider_cuts_between_kings = 0:\n                    if confinement_absolute = <=8 sq:\n                        => draw (n=70)\n                    if confinement_absolute = <=16 sq:\n                        => draw (n=26)\n                if slider_cuts_between_kings = 1:\n                    => draw (n=8)\n    if mobility_bucket = 5-8:\n        if confinement_absolute = <=1 sq:\n            if slider_cuts_between_kings = 0:\n                if defender_corner_distance = 0:\n                    if opposition = none:\n                        => draw (n=22)\n                    if opposition = direct:\n                        => win (n=38)\n                if defender_corner_distance = 1:\n                    => win (n=18)\n            if slider_cuts_between_kings = 1:\n                => draw (n=42)\n        if confinement_absolute = <=2 sq:\n            if king_distance = 2:\n                if defender_edge_distance = 0:\n                    if attacker_piece_en_prise = 0:\n                        => win (n=126)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=30)\n                if defender_edge_distance = 1:\n                    => win (n=16)\n            if king_distance = 3:\n                => win (n=16)\n        if confinement_absolute = <=4 sq:\n            if slider_cuts_between_kings = 0:\n                if defender_edge_distance = 0:\n                    if king_distance = 2:\n                        => draw (n=108)\n                    if king_distance = 3:\n                        => win (n=32)\n                if defender_edge_distance = 1:\n                    => win (n=40)\n            if slider_cuts_between_kings = 1:\n                => win (n=112)\n        if confinement_absolute = <=8 sq:\n            if slider_cuts_between_kings = 0:\n                if attacker_piece_en_prise = 0:\n                    if defender_edge_distance = 0:\n                        => draw (n=1338)\n                    if defender_edge_distance = 1:\n                        => draw (n=142)\n                if attacker_piece_en_prise = 1:\n                    if opposition = none:\n                        => draw (n=350)\n                    if opposition = direct:\n                        => draw (n=132)\n            if slider_cuts_between_kings = 1:\n                if confinement_bucket = <40%:\n                    if defender_edge_distance = 0:\n                        => draw (n=216)\n                    if defender_edge_distance = 1:\n                        => win (n=96)\n                if confinement_bucket = >=40%:\n                    => draw (n=568)\n        if confinement_absolute = <=16 sq:\n            if slider_cuts_between_kings = 0:\n                if king_distance = 2:\n                    if attacker_piece_en_prise = 0:\n                        => win (n=106)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=48)\n                if king_distance = 3:\n                    if attacker_piece_en_prise = 0:\n                        => draw (n=424)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=98)\n            if slider_cuts_between_kings = 1:\n                => draw (n=220)\n    if mobility_bucket = 9+:\n        if confinement_absolute = <=1 sq:\n            if king_distance = 2:\n                if attacker_piece_en_prise = 0:\n                    if opposition = none:\n                        => win (n=66)\n                    if opposition = direct:\n                        => win (n=92)\n                if attacker_piece_en_prise = 1:\n                    => draw (n=8)\n            if king_distance = 3:\n                => win (n=84)\n        if confinement_absolute = <=2 sq:\n            if king_distance = 2:\n                if defender_corner_distance = 0:\n                    if attacker_piece_en_prise = 0:\n                        => win (n=132)\n                    if attacker_piece_en_prise = 1:\n                        => draw (n=8)\n                if defender_corner_distance = 1:\n                    if opposition = none:\n                        => win (n=96)\n                    if opposition = direct:\n                        => win (n=84)\n            if king_distance = 3:\n                => win (n=192)\n        if confinement_absolute = <=4 sq:\n            if king_distance = 2:\n                if defender_edge_distance = 0:\n                    if defender_corner_distance = 0:\n                        => win (n=102)\n                    if defender_corner_distance = 1:\n                        => win (n=238)\n                if defender_edge_distance = 1:\n                    => win (n=80)\n            if king_distance = 3:\n                => win (n=256)\n        if confinement_absolute = <=8 sq:\n            if slider_cuts_between_kings = 0:\n                if king_distance = 2:\n                    if confinement_bucket = <40%:\n                        => win (n=156)\n                    if confinement_bucket = >=40%:\n                        => win (n=10)\n                if king_distance = 3:\n                    => win (n=80)\n            if slider_cuts_between_kings = 1:\n                if attacker_piece_en_prise = 0:\n                    if confinement_bucket = <40%:\n                        => win (n=124)\n                    if confinement_bucket = >=40%:\n                        => draw (n=24)\n                if attacker_piece_en_prise = 1:\n                    if defender_edge_distance = 0:\n                        => draw (n=48)\n                    if defender_edge_distance = 1:\n                        => win (n=8)\n",
+          "train_accuracy": 0.8385272145144077,
+          "train_baseline": 0.6370330843116329,
+          "transfers": [
+            {
+              "universe": "KP-K@5x5",
+              "solved_states": 92416,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.719,
+              "baseline": 0.5962166666666666,
+              "lift": 0.30408222231394727,
+              "fallback_rate": 0.2793333333333333,
+              "per_class": {
+                "win": 0.7909839695332566,
+                "loss": 0.504560915275201,
+                "draw": 0.7738238336175328
+              }
+            },
+            {
+              "universe": "KP-K@4x6",
+              "solved_states": 80624,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.7323666666666667,
+              "baseline": 0.6069,
+              "lift": 0.3191723904010855,
+              "fallback_rate": 0.2322,
+              "per_class": {
+                "win": 0.7955866327642572,
+                "loss": 0.5301415619532368,
+                "draw": 0.7830779370571758
+              }
+            },
+            {
+              "universe": "KP-K@6x6",
+              "solved_states": 317572,
+              "scored_states": 60000,
+              "sampled": true,
+              "accuracy": 0.6926333333333333,
+              "baseline": 0.56825,
+              "lift": 0.28809110210384087,
+              "fallback_rate": 0.48738333333333334,
+              "per_class": {
+                "win": 0.7913279132791328,
+                "loss": 0.482736013986014,
+                "draw": 0.7418976389499927
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "summary": [
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KR-K@4x4 (train)",
+      "nodes": 39,
+      "accuracy": 0.9590336134453782,
+      "baseline": 0.41281512605042014,
+      "lift": 0.930232558139535,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KR-K@5x5",
+      "nodes": 39,
+      "accuracy": 0.7754880694143167,
+      "baseline": 0.4492407809110629,
+      "lift": 0.5923591965340685,
+      "fallback": 0.11670281995661605
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KR-K@6x6",
+      "nodes": 39,
+      "accuracy": 0.6997,
+      "baseline": 0.4718833333333333,
+      "lift": 0.4313756430081737,
+      "fallback": 0.15956666666666666
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KR-K@8x8",
+      "nodes": 39,
+      "accuracy": 0.6144,
+      "baseline": 0.5000666666666667,
+      "lift": 0.22869715962128273,
+      "fallback": 0.21706666666666666
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KR-K@4x4 (train)",
+      "nodes": 34,
+      "accuracy": 0.9852941176470589,
+      "baseline": 0.41281512605042014,
+      "lift": 0.9749552772808587,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KR-K@5x5",
+      "nodes": 34,
+      "accuracy": 0.6934924078091106,
+      "baseline": 0.4492407809110629,
+      "lift": 0.44348168570303265,
+      "fallback": 0.06594360086767896
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KR-K@6x6",
+      "nodes": 34,
+      "accuracy": 0.6129833333333333,
+      "baseline": 0.4718833333333333,
+      "lift": 0.2671758134250639,
+      "fallback": 0.29983333333333334
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KR-K@8x8",
+      "nodes": 34,
+      "accuracy": 0.8079,
+      "baseline": 0.5000666666666667,
+      "lift": 0.6157487665022002,
+      "fallback": 0.6871166666666667
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "both",
+      "evaluated on": "KR-K@4x4 (train)",
+      "nodes": 35,
+      "accuracy": 0.990546218487395,
+      "baseline": 0.41281512605042014,
+      "lift": 0.9838998211091234,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "both",
+      "evaluated on": "KR-K@5x5",
+      "nodes": 35,
+      "accuracy": 0.6934924078091106,
+      "baseline": 0.4492407809110629,
+      "lift": 0.44348168570303265,
+      "fallback": 0.039045553145336226
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "both",
+      "evaluated on": "KR-K@6x6",
+      "nodes": 35,
+      "accuracy": 0.6129833333333333,
+      "baseline": 0.4718833333333333,
+      "lift": 0.2671758134250639,
+      "fallback": 0.3671333333333333
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "both",
+      "evaluated on": "KR-K@8x8",
+      "nodes": 35,
+      "accuracy": 0.8079,
+      "baseline": 0.5000666666666667,
+      "lift": 0.6157487665022002,
+      "fallback": 0.7365833333333334
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KQ-K@4x4 (train)",
+      "nodes": 34,
+      "accuracy": 1.0,
+      "baseline": 0.43530834340991537,
+      "lift": 1.0,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KQ-K@5x5",
+      "nodes": 34,
+      "accuracy": 0.9501709819247679,
+      "baseline": 0.4890083048363459,
+      "lift": 0.9024856596558315,
+      "fallback": 0.06277479237909135
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KQ-K@6x6",
+      "nodes": 34,
+      "accuracy": 0.8773943661971831,
+      "baseline": 0.5153521126760563,
+      "lift": 0.7470212147631503,
+      "fallback": 0.0978169014084507
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KQ-K@8x8",
+      "nodes": 34,
+      "accuracy": 0.7605166666666666,
+      "baseline": 0.5352833333333333,
+      "lift": 0.48466807732309997,
+      "fallback": 0.1059
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KQ-K@4x4 (train)",
+      "nodes": 47,
+      "accuracy": 0.9866989117291415,
+      "baseline": 0.43530834340991537,
+      "lift": 0.9764453961456104,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KQ-K@5x5",
+      "nodes": 47,
+      "accuracy": 0.8234000977039571,
+      "baseline": 0.4890083048363459,
+      "lift": 0.654397705544933,
+      "fallback": 0.040058622374206154
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KQ-K@6x6",
+      "nodes": 47,
+      "accuracy": 0.7034507042253522,
+      "baseline": 0.5153521126760563,
+      "lift": 0.38811392037198506,
+      "fallback": 0.13014084507042253
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KQ-K@8x8",
+      "nodes": 47,
+      "accuracy": 0.6679833333333334,
+      "baseline": 0.5352833333333333,
+      "lift": 0.2855503353297709,
+      "fallback": 0.3891
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "both",
+      "evaluated on": "KQ-K@4x4 (train)",
+      "nodes": 35,
+      "accuracy": 0.9975816203143894,
+      "baseline": 0.43530834340991537,
+      "lift": 0.9957173447537475,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "both",
+      "evaluated on": "KQ-K@5x5",
+      "nodes": 35,
+      "accuracy": 0.8793356130923302,
+      "baseline": 0.4890083048363459,
+      "lift": 0.7638623326959846,
+      "fallback": 0.05740107474352711
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "both",
+      "evaluated on": "KQ-K@6x6",
+      "nodes": 35,
+      "accuracy": 0.7694366197183099,
+      "baseline": 0.5153521126760563,
+      "lift": 0.5242662016855566,
+      "fallback": 0.09147887323943663
+    },
+    {
+      "fitted on": "KQ-K@4x4",
+      "features": "both",
+      "evaluated on": "KQ-K@8x8",
+      "nodes": 35,
+      "accuracy": 0.7196,
+      "baseline": 0.5352833333333333,
+      "lift": 0.39662159738909014,
+      "fallback": 0.19515
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KR-K@4x4 (train)",
+      "nodes": 39,
+      "accuracy": 0.9590336134453782,
+      "baseline": 0.41281512605042014,
+      "lift": 0.930232558139535,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KQ-K@5x5",
+      "nodes": 39,
+      "accuracy": 0.870542256961407,
+      "baseline": 0.4890083048363459,
+      "lift": 0.7466539196940726,
+      "fallback": 0.08207132388861749
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KQ-K@8x8",
+      "nodes": 39,
+      "accuracy": 0.7332166666666666,
+      "baseline": 0.5352833333333333,
+      "lift": 0.42592260517160985,
+      "fallback": 0.16253333333333334
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KR-K@4x4 (train)",
+      "nodes": 34,
+      "accuracy": 0.9852941176470589,
+      "baseline": 0.41281512605042014,
+      "lift": 0.9749552772808587,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KQ-K@5x5",
+      "nodes": 34,
+      "accuracy": 0.830972154372252,
+      "baseline": 0.4890083048363459,
+      "lift": 0.6692160611854683,
+      "fallback": 0.07816316560820713
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KQ-K@8x8",
+      "nodes": 34,
+      "accuracy": 0.7866166666666666,
+      "baseline": 0.5352833333333333,
+      "lift": 0.5408313309184807,
+      "fallback": 0.6195166666666667
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "both",
+      "evaluated on": "KR-K@4x4 (train)",
+      "nodes": 35,
+      "accuracy": 0.990546218487395,
+      "baseline": 0.41281512605042014,
+      "lift": 0.9838998211091234,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "both",
+      "evaluated on": "KQ-K@5x5",
+      "nodes": 35,
+      "accuracy": 0.830972154372252,
+      "baseline": 0.4890083048363459,
+      "lift": 0.6692160611854683,
+      "fallback": 0.038104543234000976
+    },
+    {
+      "fitted on": "KR-K@4x4",
+      "features": "both",
+      "evaluated on": "KQ-K@8x8",
+      "nodes": 35,
+      "accuracy": 0.7866166666666666,
+      "baseline": 0.5352833333333333,
+      "lift": 0.5408313309184807,
+      "fallback": 0.6739333333333334
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KP-K@4x4 (train)",
+      "nodes": 161,
+      "accuracy": 0.8299893276414088,
+      "baseline": 0.6370330843116329,
+      "lift": 0.5316083504851514,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KP-K@5x5",
+      "nodes": 161,
+      "accuracy": 0.76205,
+      "baseline": 0.5962166666666666,
+      "lift": 0.41069880711602763,
+      "fallback": 0.13043333333333335
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KP-K@4x6",
+      "nodes": 161,
+      "accuracy": 0.7724666666666666,
+      "baseline": 0.6069,
+      "lift": 0.42118205715254803,
+      "fallback": 0.12636666666666665
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "fraction",
+      "evaluated on": "KP-K@6x6",
+      "nodes": 161,
+      "accuracy": 0.71,
+      "baseline": 0.56825,
+      "lift": 0.3283149971048059,
+      "fallback": 0.232
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KP-K@4x4 (train)",
+      "nodes": 192,
+      "accuracy": 0.8281750266808965,
+      "baseline": 0.6370330843116329,
+      "lift": 0.5266098206409879,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KP-K@5x5",
+      "nodes": 192,
+      "accuracy": 0.6775333333333333,
+      "baseline": 0.5962166666666666,
+      "lift": 0.20138688240392957,
+      "fallback": 0.3576166666666667
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KP-K@4x6",
+      "nodes": 192,
+      "accuracy": 0.7009666666666666,
+      "baseline": 0.6069,
+      "lift": 0.2392944967353514,
+      "fallback": 0.2844
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "absolute",
+      "evaluated on": "KP-K@6x6",
+      "nodes": 192,
+      "accuracy": 0.61525,
+      "baseline": 0.56825,
+      "lift": 0.10885929357266921,
+      "fallback": 0.7471666666666666
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "both",
+      "evaluated on": "KP-K@4x4 (train)",
+      "nodes": 177,
+      "accuracy": 0.8385272145144077,
+      "baseline": 0.6370330843116329,
+      "lift": 0.5551308438694502,
+      "fallback": 0.0
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "both",
+      "evaluated on": "KP-K@5x5",
+      "nodes": 177,
+      "accuracy": 0.719,
+      "baseline": 0.5962166666666666,
+      "lift": 0.30408222231394727,
+      "fallback": 0.2793333333333333
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "both",
+      "evaluated on": "KP-K@4x6",
+      "nodes": 177,
+      "accuracy": 0.7323666666666667,
+      "baseline": 0.6069,
+      "lift": 0.3191723904010855,
+      "fallback": 0.2322
+    },
+    {
+      "fitted on": "KP-K@4x4",
+      "features": "both",
+      "evaluated on": "KP-K@6x6",
+      "nodes": 177,
+      "accuracy": 0.6926333333333333,
+      "baseline": 0.56825,
+      "lift": 0.28809110210384087,
+      "fallback": 0.48738333333333334
+    }
+  ]
+}

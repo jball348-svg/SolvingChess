@@ -18,6 +18,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from solvingchess.geometry import (
     BISHOP, BLACK, Geometry, KING, KNIGHT, PAWN, QUEEN, ROOK, WHITE,
 )
+from solvingchess.features import FEATURE_NAMES, FeatureExtractor
+from solvingchess.induction import accuracy, fallback_rate, fit, majority_baseline
 from solvingchess.quotient import bisimulation_quotient
 from solvingchess.rules import Rules
 from solvingchess.solver import DRAW, solve_material, solve_variant
@@ -226,6 +228,80 @@ def test_singleton_kq_is_drawn_on_small_boards():
         group = SymmetryGroup(variant.rules)
         solution = solve_variant(variant, canonical=group.canonical, max_states=200_000)
         assert solution.value_of(solution.roots[0]) == DRAW
+
+
+# --------------------------------------------------------------- features
+
+def test_features_are_board_size_independent():
+    """Every feature must take values in the same small range at every size."""
+    seen = {name: set() for name in FEATURE_NAMES}
+    for files, ranks in [(4, 4), (5, 5), (8, 8)]:
+        rules = endgame_variant("KR-K", files, ranks).rules
+        extractor = FeatureExtractor(rules)
+        solution = solve_material(rules, max_states=1_000_000)
+        for state in solution.states[::97]:
+            for name, value in zip(FEATURE_NAMES, extractor.extract(state)):
+                seen[name].add(value)
+    for name, values in seen.items():
+        assert values, name
+        assert max(values) < 8, f"{name} exploded to {max(values)}"
+
+
+def test_confinement_is_smaller_when_the_king_is_boxed_in():
+    rules = endgame_variant("KR-K", 5, 5).rules
+    extractor = FeatureExtractor(rules)
+    boxed = rules.parse("""
+        k . . . .
+        . . . . .
+        R . . . .
+        . . . . .
+        . . . K .
+    """, side_to_move=BLACK)
+    free = rules.parse("""
+        . . . . .
+        . . k . .
+        . . . . .
+        . . . . .
+        R . . K .
+    """, side_to_move=BLACK)
+    def reachable(state):
+        squares, types, _ = rules.decode(state)
+        king = squares[rules._king_slot[BLACK]]
+        return extractor._confinement(king, BLACK, squares, types,
+                                      rules.occupancy(squares))
+
+    # The rook on the third rank halves the board; the king keeps 9 squares
+    # rather than 13. The buckets are coarse enough to put both in the same
+    # class, so assert on the underlying count as well as the fraction bucket.
+    assert reachable(boxed) < reachable(free)
+    i = FEATURE_NAMES.index("confinement_bucket")
+    assert extractor.extract(boxed)[i] < extractor.extract(free)[i]
+
+
+# --------------------------------------------------------------- induction
+
+def test_tree_learns_a_separable_target():
+    rows = [(a, b) for a in range(4) for b in range(4)] * 20
+    labels = [1 if a >= 2 else 0 for a, _ in rows]
+    tree = fit(rows, labels, 2, max_depth=3, min_samples=2)
+    assert accuracy(tree, rows, labels) == 1.0
+    assert fallback_rate(tree, rows) == 0.0
+
+
+def test_unseen_feature_value_is_reported_as_fallback():
+    """The trap that experiment 004 fell into, pinned as a test."""
+    rows = [(v,) for v in (0, 0, 1, 1)] * 20
+    labels = [0, 0, 1, 1] * 20
+    tree = fit(rows, labels, 1, max_depth=2, min_samples=2)
+    unseen = [(9,)] * 10
+    assert fallback_rate(tree, unseen) == 1.0
+    assert fallback_rate(tree, rows) == 0.0
+
+
+def test_majority_baseline_is_the_control_it_claims_to_be():
+    train = [1, 1, 1, 0]
+    assert majority_baseline(train, [1, 1, 0, 0]) == 0.5
+    assert majority_baseline(train, [1, 1, 1, 1]) == 1.0
 
 
 if __name__ == "__main__":

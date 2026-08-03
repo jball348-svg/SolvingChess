@@ -3,123 +3,148 @@
 Ordered by expected information per unit of effort. Each item names the note it
 tests and the artefact it produces.
 
+For the *complete* list of testable ideas -- twenty-five of them, with Python
+sketches -- see [`docs/experiment-catalogue.md`](experiment-catalogue.md). This
+page is only the ordering.
+
 ## Status
 
 | Experiment | State | Verdict |
 |---|---|---|
 | 001 symmetry compression | **Done** | Symmetry buys exactly `\|G\| <= 16`. Does not scale. |
 | 002 minification ladder | **Done** | Six-piece singleton universes solvable; twelve-piece is not, by ~8 orders of magnitude. |
-| 003 quotient gap | **Done** | See `experiments/exp003_quotient_gap/results.md`. |
-| 004 invariant transfer | Not built | The highest-value unbuilt experiment. |
-| 005 board-size scaling law | Not built | Cheapest test of the whole programme. |
+| 003 quotient gap | **Done** | Pawnless gap x1.0-x1.5, pawnful x2.7. Structure is combinatorial, not geometric. |
+| 004 invariant transfer | **Done** | Per-position rules beat baseline everywhere but decay with board size. No size-independent rule found. |
+| 005 scaling law | **Done** | Drawn fraction of KQ-K is `C/area`; a fit on boards of area 16-30 predicts 8x8 to 1.8%. |
 | 006 zugzwang census | Not built | Decides whether ultra-weak routes are worth thinking about. |
 | 007 certificate compression | Not built | The real test of "hidden structure". |
-| 008 solver rewrite | Not built | Engineering; unblocks everything else by 2-3 rungs. |
+| 008 drawn-set decomposition | Not built | Would turn the `1/area` law from observation into mechanism. |
+| 009 solver rewrite | Not built | Engineering; unblocks everything else by 2-3 rungs. |
+
+## Where the programme stands
+
+Experiments 004 and 005 together give the sharpest result the repository has:
+
+> **Aggregate laws transfer. Per-position rules do not.**
+
+A power law for the drawn fraction, fitted only on boards of area 16 to 30,
+predicts the 8x8 board to within 1.8% for `KQ-K`. But a decision rule fitted on
+`KR-K@4x4` decays from 96% accuracy on its own board to 61% on 8x8, and every
+feature normalisation we tried decays.
+
+That reshapes the target. The thing to hunt for is a **statistical invariant**
+over a whole state space, not a positional one -- and the first candidate is
+already in hand: the drawn fraction of `KQ vs K` goes as `1/area`, with the local
+exponent sitting on -1.007 by 8x8.
 
 ## Next four, in order
 
-### 005 -- Board-size scaling law
+### 008 -- Decompose the drawn set
 
-*Tests note 07. One script, minutes of compute.*
+*Turns experiment 005's law into a mechanism. Cheapest item on the list.*
 
-Solve `KR-K` and `KQ-K` on 4x4, 4x5, 4x6, 5x5, 5x6, 6x6. Plot drawn fraction and
-maximum DTM against board dimensions.
+The proposed explanation for `drawn fraction ~ 1/area` is that a `KQ-K` draw
+requires the queen to sit in a bounded neighbourhood of the kings -- stalemate or
+en prise -- which constrains one of three placements to `O(1)` choices instead of
+`O(area)`. Partition the drawn states of `KQ-K` across board sizes into
+stalemates, en-prise positions and everything else, and check that the third
+bucket grows as `O(area)` rather than `O(area^2)`.
 
-**Why first.** Every scaling story in this repository assumes there is a smooth
-quantity to induct on. Nobody has checked. If these curves are not smooth, the
-"prove it small and scale it" framing should be abandoned in its current form,
-and that changes what everything else is for. It is also the cheapest thing on
-the list.
+**Why first.** If the mechanism holds, the `1/area` law stops being a curve fit
+and becomes a counting argument -- which is the first thing in this repository
+that could plausibly be written up as a proof. If it fails, we have a law with no
+explanation, which is worth knowing before building anything on top of it.
 
-**Deliverable.** `results/exp005_scaling_law.json` plus a fitted exponent, or a
-statement that no clean law exists.
-
-### 004 -- Invariant transfer
-
-*Tests note 03's H3 and note 06's mechanism 5.*
-
-Fit a cheap feature map (king distance, opposition parity, rook alignment, edge
-proximity, mobility counts) to predict exact values on `KR-K@4x4`. Then
-**predict** `KR-K@5x5` and `KR-K@4x6` before solving them, and score the
-prediction.
-
-**Why it matters more than it looks.** This is the only experiment that produces
-evidence about *transfer* rather than about one universe. A feature set that
-predicts a rung it was not fitted to is the first real evidence that anything
-here scales. A feature set that does not is a clean negative result.
-
-**Deliverable.** Held-out accuracy per universe, and the feature set itself in a
-form that can be carried up the ladder.
+**Deliverable.** A three-way decomposition of the drawn set per board size, with
+fitted growth exponents for each bucket.
 
 ### 006 -- Zugzwang census
 
-*Tests note 06's mechanism 3.*
+*Tests `research/06` mechanism 3. One afternoon.*
 
 For every solved universe, count states where the side to move would strictly
-prefer to pass. Report the fraction, and its dependence on material and board
-size.
+prefer to pass. Report the fraction against material and board size.
 
 **Why.** Strategy stealing -- the technique that gives Hex a size-independent
 ultra-weak solution -- needs "an extra move never hurts". Zugzwang is exactly the
-failure of that premise. If zugzwang is rare and confined to characterisable
-material, a strategy-stealing argument modulo an exceptional set becomes
-conceivable. If it is everywhere, the ultra-weak route is closed and we should
-stop thinking about it.
+failure of that premise. If it is rare and confined to characterisable material,
+an ultra-weak argument modulo an exceptional set becomes conceivable. If it is
+everywhere, that route is closed and we stop thinking about it.
 
-**Deliverable.** A zugzwang frequency table across the ladder.
+Sketch: `docs/experiment-catalogue.md`, A1.
 
 ### 007 -- Certificate compression
 
-*Tests note 06's mechanism 7, and is the sharpest form of the founding
+*Tests `research/06` mechanism 7, and is the sharpest form of the founding
 hypothesis.*
 
-Take the `KR-K@4x4` table and fit a minimal decision list over simple predicates.
-Report exact accuracy and description length in bits, against the entropy of the
-raw table.
+Fit decision lists of increasing size to a solved table and plot description
+length against exactness. A knee means a short certificate exists; a straight
+line to 100% means the table is being memorised.
 
-**Why.** A solved game whose table compresses to a page is *understood*. One that
-does not is merely *computed*. Both prior solved games produced oracles rather
-than theorems. If micro-chess tables resist compression at 10^5 states, that is
-substantive evidence against hidden structure, at a size where we can still see
-it clearly.
+Experiment 004 already gives a partial answer -- a 39-node rule reaches 96% on
+`KR-K@4x4` -- but 96% is not a certificate. The question is what it costs to
+reach 100%, and whether that cost grows with board size.
+
+Sketch: `docs/experiment-catalogue.md`, A2.
+
+### 010 -- Name the KP-K blocks
+
+*The concrete follow-up experiment 003 pointed at.*
+
+`KP-K@4x4` has 3,456 behavioural classes over 18,740 states, a x2.7 improvement
+on symmetry -- the only place we found substantial non-geometric structure. Fit
+features to predict *block membership* rather than value, and see whether the
+blocks correspond to named endgame concepts.
+
+Sketch: `docs/experiment-catalogue.md`, A4.
 
 ## Later
 
-### 008 -- Solver rewrite
+### 009 -- Solver rewrite
 
 Dense material indexing, bitboard move generation, numpy-vectorised retrograde
-passes. Current throughput is roughly 20,000 states/second in pure Python; 10^6
-is realistic. That is two to three extra rungs, which improves every experiment
-above.
+passes. Current throughput is roughly 20,000 states/second; 10^6 is realistic.
+Two to three extra rungs, which improves every experiment above.
 
 **Do this only when a specific experiment is blocked on table size.** It is the
 most tempting item on the list and the least informative on its own.
 
-### 009 -- Weak solving
+### 011 -- Board topology
 
-Proof-number search seeded with whatever invariants survive 004, aimed at
-`singleton-KQRBNP@5x5`. This is how Gardner's 5x5 was actually solved, and it is
-the only realistic route to the top rung of the ladder. Depends on 004
-producing something.
+Cylinders and tori. A cylindrical board has no edges, which removes the mating
+net entirely. Experiment 005's proposed mechanism for the `1/area` law is
+essentially an edge-and-corner argument, so a torus would falsify or confirm it
+sharply -- and it is a much cheaper way to vary board structure than adding
+dimensions. Sketch: `docs/experiment-catalogue.md`, D5.
 
-### 010 -- Decomposable universes
+### 012 -- Weak solving
 
-Construct universes forced to decompose into independent components (pawn chains
-separated by blocked files) and test whether the game value equals the
-combinatorial-game-theory sum of the parts. Tests note 06's mechanism 6.
+Proof-number search seeded with whatever survives experiment 004, aimed at
+`singleton-KQRBNP@5x5`. The only realistic route to the top rung of the
+minification ladder, and how Gardner's 5x5 was actually done.
 
-### 011 -- n-dimensional kernel
+### 013 -- Rule perturbation
 
-Generalise `Geometry` beyond two dimensions. **Gated on 005**: if structural
-quantities do not follow clean laws across 2D rectangles, they will not across
-dimensions, and this refactor is not worth its cost. See note 04.
+Make piece movement sets data rather than constants, then measure whether
+chess's structural statistics are unusual among nearby rule sets. The only item
+that asks whether chess is special at all, and the refactor that lets the
+repository ask comparative questions. Sketch: `docs/experiment-catalogue.md`, D4.
+
+### 014 -- n-dimensional kernel
+
+Gated on 011. See `research/04`: dimension multiplies the symmetry group by a
+constant and the state space exponentially, so it is a losing trade for
+compression and is only worth building as an extra axis for invariance testing.
 
 ## Principles for adding to this list
 
 * An experiment that cannot come out against its hypothesis is not an
   experiment.
-* State the prediction before the run, in the note.
+* State the prediction before the run, in the note and in the experiment README.
+* Report the artefact rate, not just the score. Experiment 004's first run
+  produced a transfer number that turned out to be an unseen-value fallback;
+  instrumentation caught it before it became a claim.
 * Every result goes in `results/` as JSON and in the experiment's `results.md`
-  as prose. Never type a number into markdown by hand -- that is how the
-  original experiment ended up recording figures its own code did not produce.
+  as prose. Never type a number into markdown by hand.
 * Negative results get the same prominence as positive ones.

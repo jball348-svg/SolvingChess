@@ -1,4 +1,4 @@
-.PHONY: help install test test-quick exp001 exp002 exp003 experiments clean
+.PHONY: help install test test-quick exp001 exp002 exp003 exp004 exp005 experiments clean
 
 PYTHON ?= python3
 export PYTHONPATH := src
@@ -10,7 +10,9 @@ help:
 	@echo "exp001      symmetry compression"
 	@echo "exp002      minification ladder (~20 min at default budget)"
 	@echo "exp003      structure gap"
-	@echo "experiments run all three"
+	@echo "exp004      invariant transfer (~4 min)"
+	@echo "exp005      scaling law (~2 min)"
+	@echo "experiments run all five"
 	@echo "clean       remove caches"
 
 install:
@@ -32,7 +34,13 @@ exp002:
 exp003:
 	$(PYTHON) experiments/exp003_quotient_gap/run.py
 
-experiments: exp001 exp002 exp003
+exp004:
+	$(PYTHON) experiments/exp004_invariant_transfer/run.py
+
+exp005:
+	$(PYTHON) experiments/exp005_scaling_law/run.py
+
+experiments: exp001 exp002 exp003 exp004 exp005
 
 clean:
 	find . -name __pycache__ -type d -prune -exec rm -rf {} +

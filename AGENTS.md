@@ -42,6 +42,13 @@ this reason.
 repository's founding hypothesis and says so in its own results file. That is
 the standard.
 
+**Report how much of the model was exercised, not just its score.** Experiment
+004's first run produced a transfer result that turned out to be a 69%
+unseen-value fallback -- a rule fitted on 4x4 cannot have seen "the king reaches
+more than 16 squares", so most of its 8x8 predictions never reached a leaf. Any
+metric that can be satisfied by a degenerate path needs an accompanying
+diagnostic. `induction.fallback_rate` exists for this reason.
+
 ## Working on the code
 
 The kernel is `src/solvingchess/`:
@@ -54,6 +61,8 @@ The kernel is `src/solvingchess/`:
 | `symmetry.py` | per-universe symmetry groups, canonicalisation, verification |
 | `solver.py` | exploration plus backward induction for loopy games |
 | `quotient.py` | bisimulation quotients -- the floor for any sound abstraction |
+| `features.py` | board-size-independent positional features, for transfer tests |
+| `induction.py` | small printable decision-tree learner, with fallback reporting |
 | `report.py` | JSON and markdown output, shared by every experiment |
 
 Conventions worth knowing before changing anything:

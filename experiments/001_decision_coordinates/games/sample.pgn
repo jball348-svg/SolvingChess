@@ -1,5 +1,11 @@
 [Event "Test Game"]
 [Site "Local"]
 [Date "2026.08.06"]
+<<<<<<< HEAD
+=======
+[Round "1"]
+[White "Player"]
+[Black "Player"]
+>>>>>>> 800d71b7157580e83c01e587fa8575fabddf48e8
 
 1. e4 e5 2. Nf3 Nc6 3. Bb5 a6

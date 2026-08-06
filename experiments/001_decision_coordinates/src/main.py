@@ -37,9 +37,9 @@ def analyse_game(filename):
 
 if __name__ == "__main__":
 
-    input_game = "../games/sample.pgn"
+    input_game = "games/sample.pgn"
 
-    output_file = "../results/decision_coordinates.csv"
+    output_file = "results/decision_coordinates.csv"
 
 
     records = analyse_game(
